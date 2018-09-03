@@ -13,6 +13,7 @@
   "dependencies": {
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",
+    "vue-material": "^1.0.0-beta-10.2",
     "vue-property-decorator": "^6.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -22,12 +23,9 @@
     "@types/mocha": "^2.2.46",
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-e2e-cypress": "^3.0.0-beta.15",
-    "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-plugin-typescript": "^3.0.0-beta.15",
     "@vue/cli-plugin-unit-mocha": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
-    "@vue/eslint-config-airbnb": "^3.0.0-rc.3",
-    "@vue/eslint-config-typescript": "^3.0.0-rc.3",
     "@vue/test-utils": "^1.0.0-beta.16",
     "chai": "^4.1.2",
     "stylus": "^0.54.5",
@@ -38,19 +36,7 @@
   "vue": {
     "baseUrl": "",
     "productionSourceMap": false,
-    "outputDir": "dist/build"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/airbnb",
-      "@vue/typescript"
-    ],
-    "rules": {}
+    "outputDir": "./dist/build"
   },
   "postcss": {
     "plugins": {

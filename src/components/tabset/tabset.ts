@@ -1,7 +1,9 @@
+import store from '@/store/store';
+
 export default {
   name: 'tabset',
   components: {},
-  props: [],
+  props: ["id"],
   data () {
     return {
 
@@ -11,7 +13,7 @@ export default {
 
   },
   mounted () {
-
+    store.dispatch("loadTabsets", "tabsetsData");
   },
   methods: {
 
