@@ -1,9 +1,12 @@
 import store from '@/store/store';
+import tab from '@/components/tab/tab';
+
+import { FETCH_TABSETS_DATA } from '@/store/actions.type';
 
 export default {
   name: 'tabset',
-  components: {},
-  props: ["id"],
+  components: {tab},
+  props: ['id'],
   data () {
     return {
 
@@ -13,7 +16,7 @@ export default {
 
   },
   mounted () {
-    store.dispatch("loadTabsets", "tabsetsData");
+    store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData');
   },
   methods: {
 
