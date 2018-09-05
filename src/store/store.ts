@@ -12,8 +12,8 @@ export default new Vuex.Store({
     tabsets: [],
   },
   mutations: {
-    setTabsetsData(state, paylaod) {
-	    state.tabsets = paylaod;  	  
+    setTabsetsData(state, paylaod: Array<object>) {
+	    state.tabsets.push(paylaod);	  
     }
   },
   actions: {
@@ -21,11 +21,9 @@ export default new Vuex.Store({
       const responseData = await IndexedDbService.openConnection(paylaod);
       const store = IndexedDbService.createStore(responseData);
       const fullTabsetsData = await IndexedDbService.fetchFullTabsetsData(store);
-      const response = await IndexedDbService.fetchClosedTabs();
-      console.log(response);
+      const closedTabs = await IndexedDbService.fetchClosedTabs();      
 
- //    console.log(indexedDBStore);
-    //  commit("loadTabsets", JSON.stringify(indexedDBStore));
+      return commit(SET_TABSETS_DATA, closedTabs);
     }
   },
 });

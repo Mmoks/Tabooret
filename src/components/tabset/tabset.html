@@ -1,1 +1,7 @@
-<h1>TABSET COMPONENT</h1>
+<div>
+	<div v-for="tabset in tabsets">
+		<div v-for="tab in tabset">
+			{{tab.url}}
+		</div>
+	</div>
+</div>

@@ -9,16 +9,24 @@ export default {
   props: ['id'],
   data () {
     return {
-
+      tabsets: []
     }
   },
   computed: {
-
+    foo() {
+      return store.state.tabsets;
+    }
   },
-  mounted () {
-    store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData');
+  mounted() {
+    store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData').then(() => {
+      // @ts-ignore
+      this.tabsets = store.state.tabsets;
+    });
+    return store.state.tabsets
   },
   methods: {
-
+    getTabsets() {
+      return store.state.tabsets;
+    }
   }
 }

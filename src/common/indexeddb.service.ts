@@ -30,7 +30,6 @@ export const IndexedDbService = {
 			const chrome = window.chrome;
 			
 			chrome.runtime.sendMessage({type: "fetchClosedTabs"}, (response) => {
-				console.log(response)
 				resolve(response);
 			});
 

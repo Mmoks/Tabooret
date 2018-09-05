@@ -9,7 +9,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import tabset from '@/components/tabset/tabset'; // @ is an alias to /src
-/* @ts-ignore */
+// @ts-ignore 
 import tab from '@/components/tab/tab';
 
 
