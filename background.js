@@ -1,5 +1,9 @@
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
+chrome.browserAction.onClicked.addListener(() => {
+	fetchClosedTabs();
+});
+
 const fetchChromeTabs = () => {
 	return new Promise(resolve => {
 		chrome.tabs.query({}, tabs => {
@@ -9,6 +13,7 @@ const fetchChromeTabs = () => {
 };
 
 const createNewTab = () => {
+
 	return new Promise(resolve => {
 		chrome.tabs.create({
 			'url': chrome.extension.getURL('build/index.html')
@@ -38,7 +43,6 @@ const closeTabs = (tabs, newTab) => {
 			processedTabs.push(tab);
 			//chrome.tabs.remove(tab.id);
 		}
-
 	}
 	return processedTabs;
 }
@@ -50,7 +54,3 @@ const fetchClosedTabs = async () => {
 
 	reciveMessage(closedTabs);
 };
-
-chrome.browserAction.onClicked.addListener(() => {
-	fetchClosedTabs();
-});
