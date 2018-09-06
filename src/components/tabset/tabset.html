@@ -1,5 +1,5 @@
 <div>
-	<md-list v-for="tabset in tabsets">
+	<md-list v-for="tabset in tabsets" :key="+new Date()">
 		<tab :tabset="tabset"/>
 	</md-list>
 </div>

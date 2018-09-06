@@ -13,6 +13,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setTabsetsData(state, paylaod: Array<object>) {
+      // @ts-ignore
 	    state.tabsets.push(paylaod);	  
     }
   },
