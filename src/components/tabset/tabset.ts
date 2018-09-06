@@ -5,7 +5,9 @@ import { FETCH_TABSETS_DATA } from '@/store/actions.type';
 
 export default {
   name: 'tabset',
-  components: {tab},
+  components: {
+    tab
+  },
   props: ['id'],
   data () {
     return {

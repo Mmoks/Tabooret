@@ -1,7 +1,7 @@
 export default {
   name: 'tab',
   components: {},
-  props: [],
+  props: ["tabset"],
   data () {
     return {
 

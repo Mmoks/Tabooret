@@ -1,10 +1,5 @@
 <div>
 	<md-list v-for="tabset in tabsets">
-		<md-list-item v-for="tab in tabset">
-			<div>
-			<img style="width:16px;height:16px;" :src="tab.favIconUrl"/>
-			<router-link style="position: absolute; left: 40px;" md-alignment="left" to=tab.url>{{tab.title}}</router-link>
-			</div>
-		</md-list-item>
+		<tab :tabset="tabset"/>
 	</md-list>
 </div>
