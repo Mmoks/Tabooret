@@ -1,9 +1,5 @@
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
-chrome.browserAction.onClicked.addListener(() => {
-	fetchClosedTabs();
-});
-
 const fetchChromeTabs = () => {
 	return new Promise(resolve => {
 		chrome.tabs.query({}, tabs => {
@@ -23,7 +19,7 @@ const createNewTab = () => {
 	});
 }
 
-const reciveMessage = (response) => {
+const receiveMessage = (response) => {
 	chrome.runtime.onMessage.addListener(
 		(request, sender, sendResponse) => {
 			if (request.type == "fetchClosedTabs")
@@ -52,5 +48,7 @@ const fetchClosedTabs = async () => {
 	const newTab = await createNewTab();
 	const closedTabs = closeTabs(tabs, newTab);
 
-	reciveMessage(closedTabs);
+	receiveMessage(closedTabs);
 };
+
+chrome.browserAction.onClicked.addListener(fetchClosedTabs);

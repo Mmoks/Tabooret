@@ -18,9 +18,9 @@ export default new Vuex.Store({
   },
   actions: {
   	async fetchTabsetsData({ commit }, paylaod: string) {
-      const responseData = await IndexedDbService.openConnection(paylaod);
-      const store = IndexedDbService.createStore(responseData);
-      const fullTabsetsData = await IndexedDbService.fetchFullTabsetsData(store);
+      //const responseData = await IndexedDbService.openConnection(paylaod);
+      //const store = IndexedDbService.createStore(responseData);
+      //const fullTabsetsData = await IndexedDbService.fetchFullTabsetsData(store);
       const closedTabs = await IndexedDbService.fetchClosedTabs();      
 
       return commit(SET_TABSETS_DATA, closedTabs);

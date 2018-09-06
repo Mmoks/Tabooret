@@ -21,6 +21,8 @@ export default {
     store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData').then(() => {
       // @ts-ignore
       this.tabsets = store.state.tabsets;
+      // @ts-ignore
+      console.log(this.tabsets);  
     });
     return store.state.tabsets
   },
