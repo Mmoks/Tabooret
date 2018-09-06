@@ -27,8 +27,7 @@ export const IndexedDbService = {
 	},
 	
 	fetchFullTabsetsData(store) {
-		const fetchTabsetsData = store.getAll();
-			
+		const fetchTabsetsData = store.getAll();			
 		return new Promise(resolve => {
 			fetchTabsetsData.onsuccess = (event) => {
 				let result: Array<object> = event.target.result; 
@@ -37,12 +36,12 @@ export const IndexedDbService = {
 		})
 	},
 
-	fetchClosedTabs() {
+	fetchClosedTabset() {
 		return new Promise(resolve => {
 			const chrome = window.chrome;
 			
-			chrome.runtime.sendMessage({type: "fetchClosedTabs"}, (response) => {
-				resolve(response);
+			chrome.runtime.sendMessage({type: "fetchClosedTabset"}, (tabs) => {
+				resolve({tabs: tabs, id: +new Date()});
 			});
 
 		});

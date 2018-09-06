@@ -1,7 +1,9 @@
 export default {
-  name: 'tab',
+  name: 'TabComponent',
   components: {},
-  props: ["tabset"],
+  props: {
+    tabs: Array,
+  },
   data () {
     return {
 
@@ -11,6 +13,7 @@ export default {
 
   },
   mounted () {
+
   },
   methods: {
 

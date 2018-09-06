@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Home</router-link>
     </div>
     <router-view/>
 
@@ -27,3 +26,15 @@
     &.router-link-exact-active
       color #42b983
 </style>
+
+<script lang="ts">
+  import TheNavigationBarComponent from '@/components/TheNavigationBarComponent/TheNavigationBarComponent';
+   
+  export default {
+  name: 'App',
+  components: {
+    TheNavigationBarComponent
+  }
+}
+
+</script>

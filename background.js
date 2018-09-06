@@ -9,7 +9,6 @@ const fetchChromeTabs = () => {
 };
 
 const createNewTab = () => {
-
 	return new Promise(resolve => {
 		chrome.tabs.create({
 			'url': chrome.extension.getURL('build/index.html')
@@ -22,7 +21,7 @@ const createNewTab = () => {
 const receiveMessage = (response) => {
 	chrome.runtime.onMessage.addListener(
 		(request, sender, sendResponse) => {
-			if (request.type == "fetchClosedTabs")
+			if (request.type == "fetchClosedTabset")
 				sendResponse(response);
 		});
 };
@@ -43,7 +42,7 @@ const closeTabs = (tabs, newTab) => {
 	return processedTabs;
 }
 
-const fetchClosedTabs = async () => {
+const fetchClosedTabset = async () => {
 	const tabs = await fetchChromeTabs();
 	const newTab = await createNewTab();
 	const closedTabs = closeTabs(tabs, newTab);
@@ -51,4 +50,4 @@ const fetchClosedTabs = async () => {
 	receiveMessage(closedTabs);
 };
 
-chrome.browserAction.onClicked.addListener(fetchClosedTabs);
+chrome.browserAction.onClicked.addListener(fetchClosedTabset);

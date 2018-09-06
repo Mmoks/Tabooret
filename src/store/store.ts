@@ -22,9 +22,9 @@ export default new Vuex.Store({
       const responseData = await IndexedDbService.openConnection(paylaod);
       const store = IndexedDbService.getObjectStore(responseData);
       const fullTabsetsData = await IndexedDbService.fetchFullTabsetsData(store);
-      const closedTabs = await IndexedDbService.fetchClosedTabs();      
-
-      return commit(SET_TABSETS_DATA, closedTabs);
+      const closedTabset = await IndexedDbService.fetchClosedTabset();      
+      
+      return commit(SET_TABSETS_DATA, closedTabset);
     }
   },
 });

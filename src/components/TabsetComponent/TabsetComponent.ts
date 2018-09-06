@@ -1,14 +1,14 @@
 import store from '@/store/store';
-import tab from '@/components/tab/tab';
+import TabComponent from '@/components/TabComponent/TabComponent';
 
 import { FETCH_TABSETS_DATA } from '@/store/actions.type';
 
 export default {
-  name: 'tabset',
+  name: 'TabsetComponent',
   components: {
-    tab
+    TabComponent,
   },
-  props: ['id'],
+  props: [],
   data () {
     return {
       tabsets: []
