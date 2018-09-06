@@ -1,20 +1,31 @@
 import {indexedDBSuccessRequestData} from "@/interface";
 
 export const IndexedDbService = {
-	openConnection(dbName: string) {
 
+	openConnection(dbName: string) {
 		return new Promise(resolve => {
-			const request = indexedDB.open(dbName, 1);
+			const request: any = indexedDB.open(dbName, 1);
+			let db: any = null;
+
 			request.onsuccess = () => {			
 				resolve(request.result);
-			}
-		});
+			};
 
+			request.onupgradeneeded = (event) => {
+				db = event.target;
+				const objectStore = db.result.createObjectStore("tabsets", {
+					keyPath: "id"
+				});
+			};
+
+		});
 	},
-	createStore(request) {
+
+	getObjectStore(request) {
 		if (request) return request.transaction("tabsets", "readwrite").objectStore("tabsets") 
 		else return "error" ;
 	},
+	
 	fetchFullTabsetsData(store) {
 		const fetchTabsetsData = store.getAll();
 			
@@ -25,6 +36,7 @@ export const IndexedDbService = {
 			}
 		})
 	},
+
 	fetchClosedTabs() {
 		return new Promise(resolve => {
 			const chrome = window.chrome;
@@ -35,4 +47,5 @@ export const IndexedDbService = {
 
 		});
 	},
+	
 }
