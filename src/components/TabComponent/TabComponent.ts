@@ -2,7 +2,7 @@ export default {
   name: 'TabComponent',
   components: {},
   props: {
-    tabs: Array,
+    tab: Object
   },
   data () {
     return {
@@ -13,7 +13,6 @@ export default {
 
   },
   mounted () {
-
   },
   methods: {
 

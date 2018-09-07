@@ -1,8 +1,4 @@
 <div>
-	<md-list-item v-for="tab in tabs" :key="tab.id">
-		<div>
-			<img style="width:16px;height:16px;" :src="tab.favIconUrl"/>
-			<a class="tab-link" target="blank" :href="tab.url">{{tab.title}}</a>
-		</div>
-	</md-list-item>
+	<img style="width:16px;height:16px;" :src="tab.favIconUrl"/>
+	<a class="tab-link" target="blank" :href="tab.url">{{tab.title}}</a>
 </div>

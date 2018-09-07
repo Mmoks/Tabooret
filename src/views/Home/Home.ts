@@ -1,9 +1,9 @@
 import { Component, Vue } from 'vue-property-decorator';
-import TabsetComponent from '@/components/TabsetComponent/TabsetComponent'; // @ is an alias to /src
+import TabsetsListComponent from '@/components/TabsetsListComponent/TabsetsListComponent'; // @ is an alias to /src
 
 @Component({
   components: {
-	TabsetComponent,
+	TabsetsListComponent,
   },
 })
 export default class Home extends Vue {}

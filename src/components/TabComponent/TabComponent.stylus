@@ -1,5 +1,5 @@
 .tab-link
-	text-ecoration: none
+	text-decoration: none
 	position: absolute
 	left: 40px
 	color: rgb(6,69,173)
