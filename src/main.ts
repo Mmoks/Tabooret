@@ -6,6 +6,7 @@ import devtools from './../node_modules/@vue/devtools'
 import App from './App.vue';
 import router from './router';	
 import store from '@/store/store';
+import {FETCH_TABSETS_DATA} from '@/store/actions.type';
 
 
 Vue.use(VueMaterial);
@@ -16,5 +17,8 @@ devtools.connect("http://localhost", "8098");
 new Vue({
   router,
   store,
+  mounted() {
+	store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData');
+  },
   render: h => h(App),
 }).$mount('#app');

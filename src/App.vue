@@ -28,12 +28,12 @@
 
 <script lang="ts">
   import TheNavigationBarComponent from '@/components/TheNavigationBarComponent/TheNavigationBarComponent';
-   
+  
   export default {
   name: 'App',
   components: {
     TheNavigationBarComponent
-  }
+  },
 }
 
 </script>

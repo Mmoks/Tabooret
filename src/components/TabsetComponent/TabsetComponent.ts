@@ -1,7 +1,7 @@
-import store from '@/store/store';
+import { mapGetters } from 'vuex'
 import TabComponent from '@/components/TabComponent/TabComponent';
 
-import { FETCH_TABSETS_DATA } from '@/store/actions.type';
+import { UPLOAD_NEW_TABSET } from '@/store/actions.type';
 
 export default {
   name: 'TabsetComponent',
@@ -9,26 +9,22 @@ export default {
     TabComponent,
   },
   props: [],
-  data () {
-    return {
-      tabsets: []
-    }
-  },
+  // data () {
+  //   return {
+  //     tabsets: []
+  //   }
+  // },
   computed: {
-    foo() {
-      return store.state.tabsets;
-    }
+     ...mapGetters([
+       'fullTabsetsData',
+    ])
   },
   mounted() {
-    store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData').then(() => {
-      // @ts-ignore
-      this.tabsets = store.state.tabsets;
-    });
-    return store.state.tabsets
+    // @ts-ignore
+    this.$store.dispatch(UPLOAD_NEW_TABSET, 'tabsetsData');
+    // @ts-ignore
+    return this.$store.state.tabsets
   },
   methods: {
-    getTabsets() {
-      return store.state.tabsets;
-    }
   }
 }

@@ -1,5 +1,5 @@
-<div>
-	<md-list v-for="tabset in tabsets" :key="tabset.id">
+<div v-if="fullTabsetsData">
+	<md-list v-for="tabset in fullTabsetsData" :key="fullTabsetsData.id">
 		<TabComponent :tabs="tabset.tabs"/>
 	</md-list>
 </div>

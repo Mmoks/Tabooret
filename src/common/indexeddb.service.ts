@@ -11,13 +11,6 @@ export const IndexedDbService = {
 				resolve(request.result);
 			};
 
-			request.onupgradeneeded = (event) => {
-				db = event.target;
-				const objectStore = db.result.createObjectStore("tabsets", {
-					keyPath: "id"
-				});
-			};
-
 		});
 	},
 
@@ -33,15 +26,15 @@ export const IndexedDbService = {
 				let result: Array<object> = event.target.result; 
 				resolve(result);
 			}
-		})
+		});
 	},
 
 	fetchClosedTabset() {
 		return new Promise(resolve => {
 			const chrome = window.chrome;
 			
-			chrome.runtime.sendMessage({type: "fetchClosedTabset"}, (tabs) => {
-				resolve({tabs: tabs, id: +new Date()});
+			chrome.runtime.sendMessage({type: "fetchClosedTabset"}, (tabset: object) => {
+				resolve(tabset);
 			});
 
 		});
