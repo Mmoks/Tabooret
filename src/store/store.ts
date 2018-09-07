@@ -6,6 +6,7 @@ import { SET_TABSETS_DATA } from './mutations.type';
 
 
 Vue.use(Vuex);
+Vue.config.devtools = true;
 
 export default new Vuex.Store({
   state: {

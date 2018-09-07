@@ -1,14 +1,17 @@
 import Vue from 'vue';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
+import devtools from './../node_modules/@vue/devtools'
 
 import App from './App.vue';
-import router from './router';
+import router from './router';	
 import store from '@/store/store';
 
 
 Vue.use(VueMaterial);
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
+Vue.config.devtools = true;
+devtools.connect("http://localhost", "8098");
 
 new Vue({
   router,

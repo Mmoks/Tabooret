@@ -4,7 +4,7 @@
   "name": "Single tab",
   "description": "Single tab vue js.",
   "version": "1.0",
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:8098 https://cdn.jsdelivr.net https://unpkg.com; object-src 'self'",
   "background": {
     "scripts": ["background.js"],
     "persistent": false
