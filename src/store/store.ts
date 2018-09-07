@@ -3,22 +3,21 @@ import Vuex from 'vuex';
 
 import { IndexedDbService } from '@/common/indexeddb.service';  
 import { SET_TABSETS_DATA, UPLOAD_NEW_TABSET} from './mutations.type'; 
+import { Tabset } from '@/interface.ts'
+
 
 Vue.use(Vuex);
 Vue.config.devtools = true;
-
+ 
 export default new Vuex.Store({
   state: {
-    tabsets: [],
+    tabsets: [] as Tabset[]
   },
   mutations: {
-    uploadNewTabset(state, paylaod: Array<object>) {
-      if(paylaod)
-	    //@ts-ignore
+    uploadNewTabset(state, paylaod: Tabset) {
       state.tabsets.push(paylaod);	  
     },
-    setTabsetsData(state, paylaod: Array<[object]>) {
-      //@ts-ignore
+    setTabsetsData(state, paylaod: Tabset[]) {      
       state.tabsets = paylaod;    
     },
 
@@ -26,21 +25,21 @@ export default new Vuex.Store({
   },
   actions: {
   	async fetchTabsetsData({ commit }, paylaod: string) {
-      const db = await IndexedDbService.openConnection(paylaod);
-      const store = IndexedDbService.getObjectStore(db);
-      const fullTabsetsData = await IndexedDbService.fetchFullTabsetsData(store);
+      const db: object = await IndexedDbService.openConnection(paylaod);
+      const store: object = IndexedDbService.getObjectStore(db);
+      const fullTabsetsData: Tabset[] = await IndexedDbService.fetchFullTabsetsData(store) as Tabset[];
       return commit(SET_TABSETS_DATA, fullTabsetsData);
     },
 
     async uploadNewTabset({ commit }, payload: string) {
-      const newTabset = await IndexedDbService.fetchClosedTabset();  
+      const newTabset: Tabset = await IndexedDbService.fetchClosedTabset() as Tabset;  
       return commit(UPLOAD_NEW_TABSET, newTabset);
     },
   },
 
   getters: {
     fullTabsetsData(state) {
-      return state.tabsets;
+      return state.tabsets.reverse();
     }
   }
 });

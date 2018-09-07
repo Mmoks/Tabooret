@@ -1,4 +1,6 @@
-export interface indexedDBSuccessRequestData {
-    request: object;
-    event: object;
+export interface Tabset {
+	id: number,
+	tabs: Array<object>,
+	createdAt: Date,
+	tabsetName: string,
 }

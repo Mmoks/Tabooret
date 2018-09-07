@@ -15,9 +15,6 @@ export default {
     ])
   },
   mounted () {
-    // @ts-ignore
-    this.$store.dispatch(UPLOAD_NEW_TABSET, 'tabsetsData');
-
   },
   methods: {
 

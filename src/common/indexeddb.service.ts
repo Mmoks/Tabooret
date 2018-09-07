@@ -1,11 +1,11 @@
-import {indexedDBSuccessRequestData} from "@/interface";
+import { Tabset } from "@/interface";
 
 export const IndexedDbService = {
 
 	openConnection(dbName: string) {
 		return new Promise(resolve => {
 			const request: any = indexedDB.open(dbName, 1);
-			let db: any = null;
+			let db: object = {};
 
 			request.onsuccess = () => {			
 				resolve(request.result);
@@ -23,7 +23,7 @@ export const IndexedDbService = {
 		const fetchTabsetsData = store.getAll();			
 		return new Promise(resolve => {
 			fetchTabsetsData.onsuccess = (event) => {
-				let result: Array<object> = event.target.result; 
+				let result: Tabset[] = event.target.result; 
 				resolve(result);
 			}
 		});
@@ -33,7 +33,7 @@ export const IndexedDbService = {
 		return new Promise(resolve => {
 			const chrome = window.chrome;
 			
-			chrome.runtime.sendMessage({type: "fetchClosedTabset"}, (tabset: object) => {
+			chrome.runtime.sendMessage({type: "fetchClosedTabset"}, (tabset: Tabset) => {
 				resolve(tabset);
 			});
 

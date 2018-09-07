@@ -6,7 +6,7 @@ import devtools from './../node_modules/@vue/devtools'
 import App from './App.vue';
 import router from './router';	
 import store from '@/store/store';
-import {FETCH_TABSETS_DATA} from '@/store/actions.type';
+import { FETCH_TABSETS_DATA, UPLOAD_NEW_TABSET } from '@/store/actions.type';
 
 
 Vue.use(VueMaterial);
@@ -18,7 +18,9 @@ new Vue({
   router,
   store,
   mounted() {
-	store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData');
+  	store.dispatch(UPLOAD_NEW_TABSET, 'tabsetsData').then(() => {  		
+		store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData');
+    });
   },
   render: h => h(App),
 }).$mount('#app');
