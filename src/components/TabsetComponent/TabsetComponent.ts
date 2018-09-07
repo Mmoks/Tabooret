@@ -1,4 +1,5 @@
 import TabComponent from '@/components/TabComponent/TabComponent';
+import { Tabset } from '@/interface.ts'
 
 export default {
   name: 'TabsetComponent',
@@ -6,7 +7,7 @@ export default {
     TabComponent,
   },
   props: {
-    tabset: Object 
+    tabset: {} as Tabset 
   },
   computed: {
 

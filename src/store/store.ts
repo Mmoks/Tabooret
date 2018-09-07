@@ -13,16 +13,18 @@ export default new Vuex.Store({
   state: {
     tabsets: [] as Tabset[]
   },
+
   mutations: {
     uploadNewTabset(state, paylaod: Tabset) {
       state.tabsets.push(paylaod);	  
     },
+
     setTabsetsData(state, paylaod: Tabset[]) {      
       state.tabsets = paylaod;    
     },
-
-
+    
   },
+
   actions: {
   	async fetchTabsetsData({ commit }, paylaod: string) {
       const db: object = await IndexedDbService.openConnection(paylaod);
