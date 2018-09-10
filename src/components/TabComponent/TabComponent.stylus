@@ -7,10 +7,11 @@
 .close 
 	position relative
 	left 5px
+	top 5px
 	width 16px
 	height 16px
 	opacity 0.3
-	margin-right 20px
+
 	&:hover
 		opacity 1
 	&:before 
@@ -23,3 +24,12 @@
 	height 16px
 	width 2px
 	background-color #333
+
+.hide 
+	display none
+
+.link-image
+	position relative
+	width 16px
+	height 16px
+	left 20px
