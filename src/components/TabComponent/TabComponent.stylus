@@ -1,5 +1,25 @@
 .tab-link
 	text-decoration: none
 	position: absolute
-	left: 40px
+	left: 60px
 	color: rgb(6,69,173)
+
+.close 
+	position relative
+	left 5px
+	width 16px
+	height 16px
+	opacity 0.3
+	margin-right 20px
+	&:hover
+		opacity 1
+	&:before 
+		transform rotate(45deg)
+	&:after 
+		transform rotate(-45deg)
+.close:before, .close:after 
+	position absolute
+	content ' '
+	height 16px
+	width 2px
+	background-color #333
