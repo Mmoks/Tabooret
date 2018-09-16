@@ -7,7 +7,7 @@
 .delete-tabset-icon
 	position absolute
 	left 5px
-	top 14px
+	top 12px
 	width 16px
 	height 16px
 	cursor pointer
