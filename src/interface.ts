@@ -1,6 +1,31 @@
+export interface Tab {
+	active: boolean,
+	audible: boolean,
+	autoDiscardable: boolean,
+	discarded: boolean,
+	favIconUrl: string,
+	highlighted: boolean,
+	id: number,
+	incognito: boolean,
+	index: number,
+	mutedInfo : object,
+	pinned: boolean,
+	selected: boolean,
+	status: string,
+	title: string,
+	url: string,
+	width: number,
+	windowId: number,
+}
+
 export interface Tabset {
 	id: number,
-	tabs: Array<object>,
+	tabs: Array<Tab>,
 	createdAt: Date,
 	tabsetName: string,
+}
+
+export interface DeleteTabPayload {
+	tabID: number,
+	tabsetID: number,
 }

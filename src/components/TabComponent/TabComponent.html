@@ -1,5 +1,5 @@
 <md-list-item v-on:mouseenter="hover" v-on:mouseleave='unHover'>
-	<i class="delete-tabset-icon material-icons" :class="{ hide: !tabIsHovered }">
+	<i class="delete-tabset-icon material-icons" :class="{ hide: !tabIsHovered }" v-on:click="deleteTab">
 		close
 	</i>
 	<img class="link-image" :src="tab.favIconUrl"/>

@@ -1,2 +1,4 @@
-export const SET_TABSETS_DATA = "setTabsetsData";
-export const UPLOAD_NEW_TABSET = "uploadNewTabset";
+export const SET_TABSETS_DATA = 'setTabsetsData';
+export const UPLOAD_NEW_TABSET = 'uploadNewTabset';
+export const UPDATE_TABSET = 'updateTabset';
+export const DELETE_TABSET = 'deleteTabset'

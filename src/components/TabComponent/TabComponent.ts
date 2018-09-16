@@ -1,8 +1,12 @@
+import { DELETE_TAB } from '@/store/actions.type' 
+
+
 export default {
     name: 'TabComponent',
     components: {},
     props: {
-        tab: Object
+        tab: Object,
+        tabsetID: Number,
     },
     data() {
         return {
@@ -14,12 +18,18 @@ export default {
     },
     methods: {
         hover() {
-            //@ts-ignore
             this.tabIsHovered = true
         },
+        
         unHover() {
-            //@ts-ignore
             this.tabIsHovered = false
-        }
+        },
+
+        deleteTab() {
+            this.$store.dispatch(DELETE_TAB, {
+                tabID: this.tab.id,
+                tabsetID: this.tabsetID,
+            });
+        }    
     }
 }

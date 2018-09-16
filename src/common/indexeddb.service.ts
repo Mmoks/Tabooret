@@ -1,4 +1,4 @@
-import { Tabset } from "@/interface";
+import { Tabset } from '@/interface';
 
 export const IndexedDbService = {
 
@@ -14,9 +14,9 @@ export const IndexedDbService = {
 		});
 	},
 
-	getObjectStore(request) {
-		if (request) return request.transaction("tabsets", "readwrite").objectStore("tabsets") 
-		else return "error" ;
+	getObjectStore(db) {
+		if (db) return db.transaction('tabsets', 'readwrite').objectStore('tabsets') 
+		else return 'error' ;
 	},
 	
 	fetchFullTabsetsData(store) {
@@ -33,11 +33,33 @@ export const IndexedDbService = {
 		return new Promise(resolve => {
 			const chrome = window.chrome;
 			
-			chrome.runtime.sendMessage({type: "fetchClosedTabset"}, (tabset: Tabset) => {
+			chrome.runtime.sendMessage({type: 'fetchClosedTabset'}, (tabset: Tabset) => {
 				resolve(tabset);
 			});
 
 		});
 	},
+
+	async deleteTab(tabset: Tabset) {
+		const db = await this.openConnection('tabsetsData');
+		const objectStore = this.getObjectStore(db);
+		objectStore.put(tabset);		
+		return new Promise(resolve => {
+			objectStore.onsuccess = () => {
+				resolve();
+			};
+		});
+	},
+
+	async deleteTabset(tabsetID: number) {
+		const db = await this.openConnection('tabsetsData');
+		const objectStore = this.getObjectStore(db);
+		objectStore.delete(tabsetID);		
+		return new Promise(resolve => {
+			objectStore.onsuccess = () => {
+				resolve();
+			};
+		});
+	}
 	
 }
