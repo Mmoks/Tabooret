@@ -37,7 +37,7 @@
   "vue": {
     "baseUrl": "",
     "productionSourceMap": false,
-    "outputDir": "./dist/build"
+    "outputDir": "./build"
   },
   "postcss": {
     "plugins": {
