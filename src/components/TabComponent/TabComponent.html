@@ -1,5 +1,7 @@
 <div v-on:mouseenter="hover" v-on:mouseleave='unHover'>
-	<span class="close" :class="hovered ? '' : 'hide'"></span>
+	<i class="delete-tabset-icon material-icons" :class="{ hide: !tabIsHovered }">
+		close
+	</i>
 	<img class="link-image" :src="tab.favIconUrl"/>
 	<a class="tab-link" target="blank" :href="tab.url">{{tab.title}}</a>
 </div>

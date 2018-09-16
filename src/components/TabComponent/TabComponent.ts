@@ -6,7 +6,7 @@ export default {
     },
     data() {
         return {
-            hovered: false as boolean
+            tabIsHovered: false as boolean
         }
     },
     computed: {},
@@ -15,11 +15,11 @@ export default {
     methods: {
         hover() {
             //@ts-ignore
-            this.hovered = true
+            this.tabIsHovered = true
         },
         unHover() {
             //@ts-ignore
-            this.hovered = false
+            this.tabIsHovered = false
         }
     }
 }

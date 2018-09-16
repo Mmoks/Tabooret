@@ -1,29 +1,16 @@
 .tab-link
-	text-decoration: none
-	position: absolute
-	left: 60px
-	color: rgb(6,69,173)
+	text-decoration none
+	position absolute
+	left 60px
+	color rgb(6,69,173)
 
-.close 
-	position relative
+.delete-tabset-icon
+	position absolute
 	left 5px
-	top 5px
+	top 14px
 	width 16px
 	height 16px
-	opacity 0.3
-
-	&:hover
-		opacity 1
-	&:before 
-		transform rotate(45deg)
-	&:after 
-		transform rotate(-45deg)
-.close:before, .close:after 
-	position absolute
-	content ' '
-	height 16px
-	width 2px
-	background-color #333
+	cursor pointer
 
 .hide 
 	display none
