@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { IndexedDbService } from '@/common/indexeddb.service';  
-import { SET_TABSETS_DATA, UPLOAD_NEW_TABSET, UPDATE_TABSET, DELETE_TABSET } from './mutations.type'; 
+import { SET_TABSETS_DATA, UPLOAD_NEW_TABSET, DELETE_TAB, DELETE_TABSET } from './mutations.type'; 
 import { Tabset, DeleteTabPayload } from '@/interface.ts'
 
 
@@ -23,7 +23,7 @@ export default new Vuex.Store({
       state.tabsets = paylaod;    
     },
 
-    updateTabset(state, payload: Tabset) {
+    deleteTab(state, payload: Tabset) {
       state.tabsets.map((tabset: Tabset) => tabset.id === payload.id ? payload : tabset);
     },
 
@@ -46,20 +46,23 @@ export default new Vuex.Store({
       return context.commit(UPLOAD_NEW_TABSET, newTabset);
     },
 
-    async deleteTab(context, payload: DeleteTabPayload) {
+    deleteTab(context, payload: DeleteTabPayload) {
        let tabset:Tabset = context.state.tabsets.filter(tabset => payload.tabsetID === tabset.id)[0]
           Object.freeze(tabset);
           tabset.tabs = tabset.tabs.filter(tab => tab.id !== payload.tabID);
        
        if (tabset.tabs.length) {
-         IndexedDbService.deleteTab(tabset);
-         context.commit(UPDATE_TABSET, payload);
+         IndexedDbService.deleteTab(tabset).then(() => context.commit(DELETE_TAB, payload));
        } else {
-         IndexedDbService.deleteTabset(tabset.id);
-         context.commit(DELETE_TABSET, tabset.id);                 
+         IndexedDbService.deleteTabset(tabset.id).then(() => context.commit(DELETE_TABSET, tabset.id));                 
       }
-      
-    }
+
+    },
+
+    deleteTabset(context, payload: number) {
+      IndexedDbService.deleteTabset(payload).then(() => context.commit(DELETE_TABSET, payload));
+    },
+
   },
 
   getters: {
