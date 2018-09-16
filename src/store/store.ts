@@ -28,7 +28,7 @@ export default new Vuex.Store({
     },
 
     deleteTabset(state, payload: number) {
-      state.tabsets.map(tabset => tabset.id !== payload ? tabset : undefined);
+      state.tabsets = state.tabsets.filter(tabset => tabset.id !== payload);
     }
     
   },
@@ -48,21 +48,21 @@ export default new Vuex.Store({
 
     async deleteTab(context, payload: DeleteTabPayload) {
        let tabset:Tabset = context.state.tabsets.filter(tabset => payload.tabsetID === tabset.id)[0]
-       tabset.tabs = tabset.tabs.filter(tab => tab.id !== payload.tabID);
+          Object.freeze(tabset);
+          tabset.tabs = tabset.tabs.filter(tab => tab.id !== payload.tabID);
+       
        if (tabset.tabs.length) {
-         console.log(tabset.tabs);
-         IndexedDbService.deleteTab(tabset).then(() => context.commit(UPDATE_TABSET, tabset));
-       }
-       else {
-         console.log("deleteTabset");
-         IndexedDbService.deleteTabset(tabset.id).then(() => context.commit(DELETE_TABSET, tabset.id));                 
+         IndexedDbService.deleteTab(tabset);
+         context.commit(UPDATE_TABSET, payload);
+       } else {
+         IndexedDbService.deleteTabset(tabset.id);
+         context.commit(DELETE_TABSET, tabset.id);                 
       }
     }
   },
 
   getters: {
     fullTabsetsData(state) {
-      console.log(state.tabsets)
       return state.tabsets.reverse();
     }
   }

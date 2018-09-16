@@ -43,23 +43,13 @@ export const IndexedDbService = {
 	async deleteTab(tabset: Tabset) {
 		const db = await this.openConnection('tabsetsData');
 		const objectStore = this.getObjectStore(db);
-		objectStore.put(tabset);		
-		return new Promise(resolve => {
-			objectStore.onsuccess = () => {
-				resolve();
-			};
-		});
+		objectStore.put(tabset);
 	},
 
 	async deleteTabset(tabsetID: number) {
 		const db = await this.openConnection('tabsetsData');
 		const objectStore = this.getObjectStore(db);
 		objectStore.delete(tabsetID);		
-		return new Promise(resolve => {
-			objectStore.onsuccess = () => {
-				resolve();
-			};
-		});
 	}
 	
 }
