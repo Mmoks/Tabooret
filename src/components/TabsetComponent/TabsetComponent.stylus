@@ -1,0 +1,7 @@
+.tabset-name
+	position relative
+	left 8px
+
+.created-at
+	position relative
+	left 8px

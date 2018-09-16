@@ -1,4 +1,4 @@
-import { Tabset } from '@/interface';
+	import { Tabset } from '@/interface';
 
 export const IndexedDbService = {
 
@@ -34,6 +34,7 @@ export const IndexedDbService = {
 			const chrome = window.chrome;
 			
 			chrome.runtime.sendMessage({type: 'fetchClosedTabset'}, (tabset: Tabset) => {
+				console.log(tabset);
 				resolve(tabset);
 			});
 

@@ -75,8 +75,11 @@ const uploadTabsetToIndexedDB = (store, tabset) => {
 		tabsetName: ''
 	};
 
-	store.put(processedTabset);
-	return processedTabset;
+	const req = store.put(processedTabset);
+	
+	return new Promise(resolve => {		
+		req.onsuccess = () => resolve(processedTabset);	
+	});
 };
 
 const fetchClosedTabset = async () => {
@@ -85,7 +88,7 @@ const fetchClosedTabset = async () => {
 	const closedTabset = closeTabs(tabs, newTab);
 	const db = await openConnection("tabsetsData");
 	const store = getObjectStore(db);
-	const processedTabset = uploadTabsetToIndexedDB(store, closedTabset);
+	const processedTabset = await uploadTabsetToIndexedDB(store, closedTabset);
 	receiveMessage(processedTabset);
 };
 
