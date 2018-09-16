@@ -34,16 +34,16 @@ export default new Vuex.Store({
   },
 
   actions: {
-  	async fetchTabsetsData({ commit }, paylaod: string) {
+  	async fetchTabsetsData(context, paylaod: string) {
       const db: object = await IndexedDbService.openConnection(paylaod);
-      const store: object = IndexedDbService.getObjectStore(db);
-      const fullTabsetsData: Tabset[] = await IndexedDbService.fetchFullTabsetsData(store) as Tabset[];
-      return commit(SET_TABSETS_DATA, fullTabsetsData);
+      const objectStore: object = IndexedDbService.getObjectStore(db);
+      const fullTabsetsData: Tabset[] = await IndexedDbService.fetchFullTabsetsData(objectStore) as Tabset[];
+      return context.commit(SET_TABSETS_DATA, fullTabsetsData);
     },
 
-    async uploadNewTabset({ commit }, payload: string) {
+    async uploadNewTabset(context, payload: string) {
       let newTabset: Tabset = await IndexedDbService.fetchClosedTabset() as Tabset;  
-      return commit(UPLOAD_NEW_TABSET, newTabset);
+      return context.commit(UPLOAD_NEW_TABSET, newTabset);
     },
 
     async deleteTab(context, payload: DeleteTabPayload) {
@@ -58,6 +58,7 @@ export default new Vuex.Store({
          IndexedDbService.deleteTabset(tabset.id);
          context.commit(DELETE_TABSET, tabset.id);                 
       }
+      
     }
   },
 
