@@ -1,6 +1,6 @@
-<md-list>
-	<span class="md-display-1"> Tabset: {{ tabset.id }}</span>
-	<md-list-item v-for="tab in tabset.tabs" :key="tab.id">
-		<TabComponent :tab="tab"/>
-	</md-list-item>
-</md-list>	
+<md-list-item>
+	<md-list>
+		<span class="md-display-1"> Tabset: {{ tabset.id }}</span>
+		<TabComponent v-for="tab in tabset.tabs" :key="tab.id" :tab="tab"/>
+	</md-list>	
+</md-list-item>
