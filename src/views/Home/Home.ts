@@ -6,4 +6,5 @@ import TabsetsListComponent from '@/components/TabsetsListComponent/TabsetsListC
 	TabsetsListComponent,
   },
 })
+
 export default class Home extends Vue {}

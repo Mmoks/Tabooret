@@ -1,3 +1,5 @@
-<md-list>
-	<TabsetComponent v-for="tabset in fullTabsetsData" :tabset="tabset" :key="tabset.id" />
-</md-list>
+<div class="md-layout md-gutter md-alignment-top-center">
+	<md-list>
+		<TabsetComponent v-for="tabset in fullTabsetsData" :tabset="tabset" :key="tabset.id" class="md-layout-item"/>
+	</md-list>
+</div>

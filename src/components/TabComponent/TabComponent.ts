@@ -30,6 +30,7 @@ export default {
                 tabID: this.tab.id,
                 tabsetID: this.tabsetID,
             });
-        }    
+        },
+        
     }
 }

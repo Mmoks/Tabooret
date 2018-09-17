@@ -1,7 +1,20 @@
 .tabset-name
 	position relative
-	left 8px
-
+	left 36px
+//	color #202124
+	
 .created-at
 	position relative
-	left 8px
+	left 38px
+	
+.tabset-content
+	width 730px
+	border-radius 15px
+
+.md-list-item
+	border-radius 15px	
+	
+.control__button
+	position relative
+	left 27px
+	bottom 0px

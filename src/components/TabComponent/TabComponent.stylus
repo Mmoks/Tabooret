@@ -2,12 +2,12 @@
 	text-decoration none
 	position absolute
 	left 60px
-	color rgb(6,69,173)
+	color #1a73e8
 
 .delete-tabset-icon
 	position absolute
 	left 0px
-	top 12px
+	top 13px
 	width 16px
 	height 16px
 	cursor pointer

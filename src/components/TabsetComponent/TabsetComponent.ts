@@ -8,14 +8,18 @@ export default {
   components: {
     TabComponent,
   },
+  
   props: {
     tabset: {} as Tabset 
   },
+  
   computed: {
 
   },
+  
   mounted() {
   },
+
   methods: {
     deleteTabset() {
       this.$store.dispatch(DELETE_TABSET, this.tabset.id);
