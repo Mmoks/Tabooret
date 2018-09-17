@@ -2,7 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { IndexedDbService } from '@/common/indexeddb.service';  
-import { SET_TABSETS_DATA, UPLOAD_NEW_TABSET, DELETE_TAB, DELETE_TABSET } from './mutations.type'; 
+import { SET_TABSETS_DATA, UPLOAD_NEW_TABSET, 
+         DELETE_TABSET, UPDATE_TABSET 
+       } from './mutations.type'; 
 import { Tabset, DeleteTabPayload } from '@/interface.ts'
 
 
@@ -23,8 +25,9 @@ export default new Vuex.Store({
       state.tabsets = paylaod;    
     },
 
-    deleteTab(state, payload: Tabset) {
-      state.tabsets.map((tabset: Tabset) => tabset.id === payload.id ? payload : tabset);
+    updateTabset(state, payload: Tabset) {
+      let tabset: Tabset = state.tabsets.filter((tabset: Tabset) => tabset.id === payload.id)[0];
+      tabset.tabs = payload.tabs;
     },
 
     deleteTabset(state, payload: number) {
@@ -47,15 +50,19 @@ export default new Vuex.Store({
     },
 
     deleteTab(context, payload: DeleteTabPayload) {
-       let tabset:Tabset = context.state.tabsets.filter(tabset => payload.tabsetID === tabset.id)[0]
-          Object.freeze(tabset);
-          tabset.tabs = tabset.tabs.filter(tab => tab.id !== payload.tabID);
-       
-       if (tabset.tabs.length) {
-         IndexedDbService.deleteTab(tabset).then(() => context.commit(DELETE_TAB, payload));
-       } else {
-         IndexedDbService.deleteTabset(tabset.id).then(() => context.commit(DELETE_TABSET, tabset.id));                 
-      }
+       let tabset: Tabset = context.state.tabsets.filter(tabset => payload.tabsetID === tabset.id)[0]
+       let newTabs = tabset.tabs.filter(tab => tab.id !== payload.tabID);
+       let updatedTabset: Tabset = {
+         createdAt: tabset.createdAt,
+         id: tabset.id,
+         tabs: newTabs,
+         tabsetName: tabset.tabsetName,
+       };
+
+       if (updatedTabset.tabs.length)
+         IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(UPDATE_TABSET, updatedTabset));
+       else
+         IndexedDbService.deleteTabset(tabset.id).then(() => context.commit(DELETE_TABSET, tabset.id));      
 
     },
 

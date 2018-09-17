@@ -1,4 +1,4 @@
-	import { Tabset } from '@/interface';
+import { Tabset } from '@/interface';
 
 export const IndexedDbService = {
 
@@ -41,7 +41,7 @@ export const IndexedDbService = {
 		});
 	},
 
-	async deleteTab(tabset: Tabset) {
+	async updateTabset(tabset: Tabset) {
 		const db = await this.openConnection('tabsetsData');
 		const objectStore = this.getObjectStore(db);
 		const req = objectStore.put(tabset);

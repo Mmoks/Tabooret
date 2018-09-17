@@ -20,7 +20,7 @@ export interface Tab {
 
 export interface Tabset {
 	id: number,
-	tabs: Array<Tab>,
+	tabs: Tab[],
 	createdAt: Date,
 	tabsetName: string,
 }
