@@ -3,5 +3,5 @@
 		close
 	</i>
 	<img class="link-image" :src="tab.favIconUrl"/>
-	<a class="tab-link" target="blank" :href="tab.url">{{ tab.title }}</a>
+	<a class="tab-link" target="blank" :href="tab.url" v-on:click="deleteTab">{{ tab.title }}</a>
 </md-list-item>
