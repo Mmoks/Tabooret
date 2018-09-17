@@ -7,6 +7,7 @@ export default {
     props: {
         tab: Object,
         tabsetID: Number,
+        lockedTabset: Boolean,
     },
     data() {
         return {
@@ -31,6 +32,6 @@ export default {
                 tabsetID: this.tabsetID,
             });
         },
-        
+
     }
 }

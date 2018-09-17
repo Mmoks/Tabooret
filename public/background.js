@@ -14,22 +14,27 @@ const openConnection = (dbName) => {
 		let db = null;
 
 		request.onsuccess = () => {
-			resolve(request.result);
+			if (request.result.objectStoreNames.length)
+				resolve(request.result);
 		};
 
 		request.onupgradeneeded = (event) => {
 			db = event.target;
-			const objectStore = db.result.createObjectStore("tabsets", {
-				keyPath: "id"
+			
+			const objectStore = db.result.createObjectStore('tabsets', {
+				keyPath: 'id'
 			});
-		};
 
+			objectStore.onsuccess = () => {				
+				resolve(db.result);
+			};
+		};
 	});
 };
 
 const getObjectStore = (db) => {
-	if (db) return db.transaction("tabsets", "readwrite").objectStore("tabsets")
-	else return "error";
+	if (db) return db.transaction('tabsets', 'readwrite').objectStore('tabsets')
+	else return 'error';
 };
 
 const createNewTab = () => {
@@ -45,7 +50,7 @@ const createNewTab = () => {
 const receiveMessage = (response) => {
 	chrome.runtime.onMessage.addListener(
 		(request, sender, sendResponse) => {
-			if (request.type == "fetchClosedTabset")
+			if (request.type == 'fetchClosedTabset')
 				sendResponse(response);
 		});
 };
@@ -55,7 +60,7 @@ const closeTabs = (tabs, newTab) => {
 
 	for (let tab of tabs) {
 		let notCurrentTab = newTab.id !== tab.id;
-		let notNewTab = tab.url.indexOf("chrome://newtab") === -1;
+		let notNewTab = tab.url.indexOf('chrome://newtab') === -1;
 		let notExtPage = tab.url.indexOf(newTab.url) === -1;
 
 		if (notCurrentTab && notNewTab && notExtPage) {
@@ -71,6 +76,7 @@ const uploadTabsetToIndexedDB = (store, tabset) => {
 	const processedTabset = {
 		id: +createdAt,
 		tabs: tabset,
+		locked: false,
 		createdAt: createdAt,
 		tabsetName: ''
 	};
@@ -86,7 +92,7 @@ const fetchClosedTabset = async () => {
 	const tabs = await fetchChromeTabs();
 	const newTab = await createNewTab();
 	const closedTabset = closeTabs(tabs, newTab);
-	const db = await openConnection("tabsetsData");
+	const db = await openConnection('tabsetsData');
 	const store = getObjectStore(db);
 	const processedTabset = await uploadTabsetToIndexedDB(store, closedTabset);
 	receiveMessage(processedTabset);

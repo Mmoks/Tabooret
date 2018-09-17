@@ -1,6 +1,6 @@
 import TabComponent from '@/components/TabComponent/TabComponent';
 import { Tabset } from '@/interface.ts';
-import { DELETE_TABSET } from '@/store/actions.type';
+import { DELETE_TABSET, TOGGLE_TABSET_LOCKING } from '@/store/actions.type';
 
 
 export default {
@@ -9,6 +9,10 @@ export default {
     TabComponent,
   },
   
+  data() {
+    return {}
+  },
+
   props: {
     tabset: {} as Tabset 
   },
@@ -23,6 +27,11 @@ export default {
   methods: {
     deleteTabset() {
       this.$store.dispatch(DELETE_TABSET, this.tabset.id);
-    }
+    },
+
+    toggleLock() {
+      this.$store.dispatch(TOGGLE_TABSET_LOCKING, this.tabset.id);
+    },
+
   }
 }

@@ -3,7 +3,8 @@ import Vuex from 'vuex';
 
 import { IndexedDbService } from '@/common/indexeddb.service';  
 import { SET_TABSETS_DATA, UPLOAD_NEW_TABSET, 
-         DELETE_TABSET, UPDATE_TABSET 
+         DELETE_TABSET, UPDATE_TABSET, 
+         TOGGLE_TABSET_LOCKING, SET_TABSET_TABS
        } from './mutations.type'; 
 import { Tabset, DeleteTabPayload } from '@/interface.ts'
 
@@ -25,14 +26,19 @@ export default new Vuex.Store({
       state.tabsets = paylaod;    
     },
 
-    updateTabset(state, payload: Tabset) {
+    setTabsetTabs(state, payload: Tabset) {
       let tabset: Tabset = state.tabsets.filter((tabset: Tabset) => tabset.id === payload.id)[0];
       tabset.tabs = payload.tabs;
     },
 
     deleteTabset(state, payload: number) {
       state.tabsets = state.tabsets.filter(tabset => tabset.id !== payload);
-    }
+    },
+
+    toggleTabsetLocking(state, payload: number) {
+      let tabset: Tabset = state.tabsets.filter((tabset: Tabset) => tabset.id === payload)[0];
+      tabset.locked = !tabset.locked;
+    },
     
   },
 
@@ -56,11 +62,12 @@ export default new Vuex.Store({
          createdAt: tabset.createdAt,
          id: tabset.id,
          tabs: newTabs,
+         locked: tabset.locked,
          tabsetName: tabset.tabsetName,
        };
 
        if (updatedTabset.tabs.length)
-         IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(UPDATE_TABSET, updatedTabset));
+         IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(SET_TABSET_TABS, updatedTabset));
        else
          IndexedDbService.deleteTabset(tabset.id).then(() => context.commit(DELETE_TABSET, tabset.id));      
 
@@ -69,6 +76,19 @@ export default new Vuex.Store({
     deleteTabset(context, payload: number) {
       IndexedDbService.deleteTabset(payload).then(() => context.commit(DELETE_TABSET, payload));
     },
+
+    toggleTabsetLocking(context, payload: number) {
+       let tabset: Tabset = context.state.tabsets.filter(tabset => payload === tabset.id)[0]
+       let updatedTabset: Tabset = {
+         createdAt: tabset.createdAt,
+         id: tabset.id,
+         tabs: tabset.tabs,
+         locked: !tabset.locked,
+         tabsetName: tabset.tabsetName,
+       };
+
+      IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(TOGGLE_TABSET_LOCKING, payload));
+    }
 
   },
 

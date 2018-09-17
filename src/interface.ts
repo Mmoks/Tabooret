@@ -23,6 +23,7 @@ export interface Tabset {
 	tabs: Tab[],
 	createdAt: Date,
 	tabsetName: string,
+	locked: boolean,
 }
 
 export interface DeleteTabPayload {

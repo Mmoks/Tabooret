@@ -18,3 +18,11 @@
 	position relative
 	left 27px
 	bottom 0px
+	
+.lock__open
+	position absolute
+	right 10px
+	font-size 35px
+	top 21px
+	cursor pointer
+	color rgba(0,0,0,0.54)

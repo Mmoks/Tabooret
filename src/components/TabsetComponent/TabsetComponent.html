@@ -4,12 +4,17 @@
 			<div style="height: 60px; padding-top:5px">
 				<span class="md-title tabset__name md-list-item-text"> Tabset: {{ tabset.id }}</span>
 				<span class="md-caption created__at md-list-item-text">Created at {{ tabset.createdAt.toString() }}</span>
+
+				<i class="md-raised lock__open material-icons" @click="toggleLock">
+					{{ tabset.locked ? "lock" : "lock_open" }}
+				</i>
+
 			</div>
 			<md-divider></md-divider>
-			<TabComponent v-for="tab in tabset.tabs" :key="tab.id" :tab="tab" :tabsetID="tabset.id"/>
+			<TabComponent v-for="tab in tabset.tabs" :key="tab.id" :lockedTabset="tabset.locked" :tab="tab" :tabsetID="tabset.id"/>
 			<div class="control__button">
-				<md-button class="md-raised md-primary">Restore tabset</md-button>
-				<md-button class="md-raised md-accent" v-on:click="deleteTabset">Delete tabset</md-button>
+				<md-button class="md-raised md-primary" v-bind:disabled="tabset.locked">Restore tabset</md-button>
+				<md-button class="md-raised md-accent" v-bind:disabled="tabset.locked" @click="deleteTabset">Delete tabset</md-button>
 			</div>
 		</md-list>
 	</md-content>
