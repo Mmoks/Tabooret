@@ -2,13 +2,20 @@
 	<md-content class="tabset__content md-elevation-6">
 		<md-list class="tabs__list">
 			<div style="height: 60px; padding-top:5px">
-				<span class="md-title tabset__name md-list-item-text"> Tabset: {{ tabset.id }}</span>
-				<span class="md-caption created__at md-list-item-text">Created at {{ tabset.createdAt.toString() }}</span>
+				<span class="md-title tabset__name md-list-item-text" :class="{ hide__tabset__title: nameIsChanging && !tabset.locked }" @click="startChangingTabsetName"> 
+					Tabset: {{ tabset.tabsetName || tabset.id }}
+				</span>
+				
+				<md-field md-inline :md-counter="false" class="tabsetname__input" :class="{ hide__input: !nameIsChanging || tabset.locked }">
+			      <md-input focues maxlength=40 v-model="tabsetName" @keyup.13="saveTabsetName" v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}">
+			      	
+			      </md-input>
+			    </md-field>
 
+				<span class="md-caption created__at md-list-item-text">Created at {{ tabset.createdAt.toString() }}</span>
 				<i class="md-raised lock__open material-icons" @click="toggleLock">
 					{{ tabset.locked ? "lock" : "lock_open" }}
 				</i>
-
 			</div>
 			<md-divider></md-divider>
 			<TabComponent v-for="tab in tabset.tabs" :key="tab.id" :lockedTabset="tabset.locked" :tab="tab" :tabsetID="tabset.id"/>

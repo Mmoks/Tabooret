@@ -1,6 +1,6 @@
 import TabComponent from '@/components/TabComponent/TabComponent';
-import { Tabset } from '@/interface.ts';
-import { DELETE_TABSET, TOGGLE_TABSET_LOCKING } from '@/store/actions.type';
+import { Tabset, ChangeTabsetNamePayload } from '@/interface.ts';
+import { DELETE_TABSET, TOGGLE_TABSET_LOCKING, CHANGE_TABSET_NAME } from '@/store/actions.type';
 
 
 export default {
@@ -10,7 +10,10 @@ export default {
   },
   
   data() {
-    return {}
+    return {
+      nameIsChanging: false as boolean,
+      tabsetName: '' as string,
+    }
   },
 
   props: {
@@ -33,5 +36,19 @@ export default {
       this.$store.dispatch(TOGGLE_TABSET_LOCKING, this.tabset.id);
     },
 
+    startChangingTabsetName() {
+      this.nameIsChanging = true;
+    },
+
+    saveTabsetName(event) {
+      let payload: ChangeTabsetNamePayload = {
+        id: this.tabset.id,
+        tabsetName: this.tabsetName
+      };
+
+      this.$store.dispatch(CHANGE_TABSET_NAME, payload)
+      event.target.blur();     
+      this.nameIsChanging = false;      
+    }
   }
 }

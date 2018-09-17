@@ -12,7 +12,7 @@ export default {
 
     data() {
         return {
-            tabIsHovered: false as boolean
+            tabIsHovered: false as boolean,            
         }
     },
 
@@ -31,7 +31,6 @@ export default {
         },
 
         deleteTab() {
-
             if(this.lockedTabset) return
             
             this.$store.dispatch(DELETE_TAB, {

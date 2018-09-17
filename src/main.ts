@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
+import VueInputAutowidth from 'vue-input-autowidth'
+
 // import devtools from './../node_modules/@vue/devtools'
 
 import App from './App.vue';
@@ -10,9 +12,10 @@ import { FETCH_TABSETS_DATA, UPLOAD_NEW_TABSET } from '@/store/actions.type';
 
 
 Vue.use(VueMaterial);
+Vue.use(VueInputAutowidth);
+
 Vue.config.productionTip = true;
 Vue.config.devtools = true;
-// devtools.connect("http://localhost", "8098");
 
 new Vue({
   router,

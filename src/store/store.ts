@@ -4,9 +4,10 @@ import Vuex from 'vuex';
 import { IndexedDbService } from '@/common/indexeddb.service';  
 import { SET_TABSETS_DATA, UPLOAD_NEW_TABSET, 
          DELETE_TABSET, UPDATE_TABSET, 
-         TOGGLE_TABSET_LOCKING, SET_TABSET_TABS
+         TOGGLE_TABSET_LOCKING, SET_TABSET_TABS,
+         CHANGE_TABSET_NAME
        } from './mutations.type'; 
-import { Tabset, DeleteTabPayload } from '@/interface.ts'
+import { Tabset, DeleteTabPayload, Tab, ChangeTabsetNamePayload } from '@/interface.ts'
 
 
 Vue.use(Vuex);
@@ -39,6 +40,11 @@ export default new Vuex.Store({
       let tabset: Tabset = state.tabsets.filter((tabset: Tabset) => tabset.id === payload)[0];
       tabset.locked = !tabset.locked;
     },
+
+    changeTabsetName(state, payload: ChangeTabsetNamePayload) {
+      let tabset: Tabset = state.tabsets.filter((tabset: Tabset) => tabset.id === payload.id)[0];
+      tabset.tabsetName = payload.tabsetName;
+    },
     
   },
 
@@ -57,7 +63,7 @@ export default new Vuex.Store({
 
     deleteTab(context, payload: DeleteTabPayload) {
        let tabset: Tabset = context.state.tabsets.filter(tabset => payload.tabsetID === tabset.id)[0]
-       let newTabs = tabset.tabs.filter(tab => tab.id !== payload.tabID);
+       let newTabs: Tab[] = tabset.tabs.filter(tab => tab.id !== payload.tabID);
        let updatedTabset: Tabset = {
          createdAt: tabset.createdAt,
          id: tabset.id,
@@ -88,7 +94,20 @@ export default new Vuex.Store({
        };
 
       IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(TOGGLE_TABSET_LOCKING, payload));
-    }
+    },
+
+    changeTabsetName(context, payload: ChangeTabsetNamePayload) {
+      let tabset: Tabset = context.state.tabsets.filter(tabset => payload.id === tabset.id)[0]
+      let updatedTabset: Tabset = {
+        createdAt: tabset.createdAt,
+        id: tabset.id,
+        tabs: tabset.tabs,
+        locked: tabset.locked,
+        tabsetName: payload.tabsetName,
+      };    
+
+      IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(CHANGE_TABSET_NAME, payload));
+     },
 
   },
 

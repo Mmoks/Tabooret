@@ -26,3 +26,15 @@
 	top 21px
 	cursor pointer
 	color rgba(0,0,0,0.54)
+
+.hide__input
+	display none
+	
+.hide__tabset__title
+	visibility hidden
+	
+.tabsetname__input
+	position absolute
+	top -16px
+	left 39px
+	width auto
