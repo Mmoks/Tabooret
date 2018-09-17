@@ -1,18 +1,15 @@
 export default {
-  name: 'TheNavigationBarComponent',
+  name: 'SearchInputComponent',
   components: {},
   props: [],
-  
   data () {
-    return { 
-      menuVisible: false
+    return {
+      isFocused: false as boolean
     }
   },
-
   computed: {
 
   },
-
   mounted () {
 
   },

@@ -22,14 +22,6 @@ export default {
     },
     
     methods: {
-        hover() {
-            this.tabIsHovered = true
-        },
-        
-        unHover() {
-            this.tabIsHovered = false
-        },
-
         deleteTab() {
             if(this.lockedTabset) return
             

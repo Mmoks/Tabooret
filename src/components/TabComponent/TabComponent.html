@@ -1,4 +1,4 @@
-<md-list-item v-on:mouseenter="hover" v-on:mouseleave="unHover" class="tab__list__item">
+<md-list-item v-on:mouseenter="tabIsHovered = true" v-on:mouseleave="tabIsHovered = false" class="tab__list__item">
 	<i class="delete-tabset-icon material-icons" :class="{ hide: !tabIsHovered || lockedTabset }" @click="deleteTab">
 		close
 	</i>

@@ -1,11 +1,11 @@
 .tabset__name
 	position relative
-	left 36px
+	left 31px
 //	color #202124
 	
 .created__at
 	position relative
-	left 38px
+	left 37px
 	
 .tabset__content
 	border-radius 7px
