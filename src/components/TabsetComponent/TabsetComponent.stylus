@@ -1,18 +1,18 @@
-.tabset-name
+.tabset__name
 	position relative
 	left 36px
 //	color #202124
 	
-.created-at
+.created__at
 	position relative
 	left 38px
 	
-.tabset-content
+.tabset__content
+	border-radius 7px
 	width 730px
-	border-radius 15px
 
-.md-list-item
-	border-radius 15px	
+.tabs__list	
+	border-radius 7px
 	
 .control__button
 	position relative

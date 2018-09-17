@@ -23,3 +23,6 @@
 	width 16px
 	height 16px
 	left 20px
+
+.tab__list__item
+	height 45px	

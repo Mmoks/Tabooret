@@ -28,7 +28,7 @@
                </md-list-item>
             </md-list>
          </md-app-drawer>
-         <md-app-content style="overflow-x: hidden">
+         <md-app-content style="min-height: 980px; overflow-x: hidden">
             <router-view/>
          </md-app-content>
       </md-app>
