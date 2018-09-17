@@ -9,14 +9,18 @@ export default {
         tabsetID: Number,
         lockedTabset: Boolean,
     },
+
     data() {
         return {
             tabIsHovered: false as boolean
         }
     },
+
     computed: {},
+    
     mounted() {
     },
+    
     methods: {
         hover() {
             this.tabIsHovered = true
@@ -27,6 +31,9 @@ export default {
         },
 
         deleteTab() {
+
+            if(this.lockedTabset) return
+            
             this.$store.dispatch(DELETE_TAB, {
                 tabID: this.tab.id,
                 tabsetID: this.tabsetID,
