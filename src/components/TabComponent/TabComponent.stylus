@@ -11,8 +11,11 @@
 	width 16px
 	height 16px
 	cursor pointer
+	color: #CCC
+	&:hover
+		color #000
 
-.hide 
+.hide
 	display none
 
 .link-image
