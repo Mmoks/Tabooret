@@ -41,7 +41,7 @@ export default {
       if (this.tabset.locked) return;
 
       this.nameIsEditing = true;
-      console.log(this.nameIsEditing);
+
       this.$nextTick(() => {
           this.$refs.tabsetNameInput.$el.focus();
       });
@@ -55,7 +55,7 @@ export default {
         id: this.tabset.id,
         tabsetName: this.tabsetName
       };
-      console.log(false);
+
       this.$store.dispatch(CHANGE_TABSET_NAME, payload)
       this.nameIsEditing = false;      
       event.target.blur();
