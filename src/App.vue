@@ -12,7 +12,7 @@
         <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
         <TheNavigationBarComponent/>
       </md-app-drawer>
-      <md-app-content style="min-height: 980px; overflow-x: hidden">
+      <md-app-content style="min-height: 980px; overflow-x: hidden !important">
         <router-view/>
       </md-app-content>
     </md-app>
@@ -26,6 +26,9 @@
   -moz-osx-font-smoothing grayscale
   text-align center
   color #2c3e50
+
+.md-app-container
+  overflow-x hidden
 
 #nav
   padding 30px
