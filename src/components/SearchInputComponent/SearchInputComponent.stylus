@@ -6,6 +6,11 @@
   border-radius 2px
   color white
   top 5px
+  &:before
+    display none
+  &:after
+    display none
+    
 
 .search__input
   left 46px
@@ -22,14 +27,16 @@
   opacity 0.7
   font-size 14px !important
     
-.search__input_icon {
-	left: 14px;
-	position: absolute;
-	top: 9px;
-	font-size: 21px;
-  color: white;
-  opacity: 0.7;
-}
+
+.search__input_icon
+  opacity 0.7
+  color white
+  left 14px
+  position absolute
+  top 9px
+  font-size 21px
+  transition 0.5s
 
 .search__input_icon_focused
+  transition 0.5s
   opacity 1

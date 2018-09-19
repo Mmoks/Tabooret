@@ -39,7 +39,7 @@ export default {
 
     startChangingTabsetName() {
       if (this.tabset.locked) return;
-      
+
       this.nameIsChanging = true;
       
       this.$nextTick(() => {
@@ -57,6 +57,7 @@ export default {
       this.$store.dispatch(CHANGE_TABSET_NAME, payload)
       this.nameIsChanging = false;      
       event.target.blur();     
+    
     }
   }
 }
