@@ -8,7 +8,7 @@ export default {
   components: {
     TabComponent,
   },
-  
+
   data() {
     return {
       nameIsChanging: false as boolean,
@@ -18,13 +18,13 @@ export default {
   },
 
   props: {
-    tabset: {} as Tabset 
+    tabset: {} as Tabset
   },
-  
+
   computed: {
 
   },
-  
+
   mounted() {
   },
 
@@ -39,13 +39,13 @@ export default {
 
     startChangingTabsetName() {
       if (this.tabset.locked) return;
-      
+
       this.nameIsChanging = true;
-      
+
       this.$nextTick(() => {
           this.$refs.tabsetNameInput.$el.focus();
       });
-    
+
     },
 
     saveTabsetName(event) {
@@ -55,8 +55,13 @@ export default {
       };
 
       this.$store.dispatch(CHANGE_TABSET_NAME, payload)
-      this.nameIsChanging = false;      
-      event.target.blur();     
+      this.nameIsChanging = false;
+      event.target.blur();
+    },
+
+    handleBlur() {
+      this.tabsetName = '';
+      this.nameIsChanging = false;
     }
   }
 }
