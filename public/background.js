@@ -12,15 +12,14 @@ const openConnection = (dbName) => {
 	return new Promise(resolve => {
 		const request = indexedDB.open(dbName, 1);
 		let db = null;
-
+		console.log(request);
 		request.onsuccess = () => {
 			if (request.result.objectStoreNames.length)
 				resolve(request.result);
 		};
-
 		request.onupgradeneeded = (event) => {
 			db = event.target;
-			
+			console.log(db);
 			const objectStore = db.result.createObjectStore('tabsets', {
 				keyPath: 'id'
 			});
