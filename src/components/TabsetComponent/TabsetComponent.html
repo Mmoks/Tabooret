@@ -3,11 +3,14 @@
 		<md-list class="tabs__list">
 			<div style="height: 60px; padding-top:5px">
 				<span class="md-title tabset__name md-list-item-text" :class="{ hide__tabset__title: nameIsChanging && !tabset.locked }" @click="startChangingTabsetName"> 
-					Tabset: {{ tabset.tabsetName || tabset.id }}
+					{{ tabset.tabsetName || tabset.id }}
 				</span>
 				
-				<md-field md-inline :md-counter="false" class="tabsetname__input" :class="{ hide__input: !nameIsChanging || tabset.locked }">
-			      <md-input focus maxlength=40 v-model="tabsetName" @keyup.13="saveTabsetName" v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}">
+				<md-field md-inline :md-counter="false" class="tabsetname__input" :class="{ 
+																							hide__input: !nameIsChanging || tabset.locked, 
+																							'md-focused': nameIsChanging && !tabset.locked
+																						 }">
+			      <md-input ref="tabsetNameInput" maxlength=40 v-model="tabsetName" @keyup.13="saveTabsetName" v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}">
 			      	
 			      </md-input>
 			    </md-field>

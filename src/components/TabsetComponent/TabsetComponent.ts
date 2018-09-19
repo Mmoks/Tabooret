@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       nameIsChanging: false as boolean,
-      tabsetName: '' as string,
+      tabsetName: '' || this.tabset.tabsetName as string,
       isHovered: false as boolean,
     }
   },
@@ -39,9 +39,15 @@ export default {
 
     startChangingTabsetName() {
       this.nameIsChanging = true;
+      
+      this.$nextTick(() => {
+          this.$refs.tabsetNameInput.$el.focus();
+      });
+    
     },
 
     saveTabsetName(event) {
+      console.log(this.tabset.tabsetName);
       let payload: ChangeTabsetNamePayload = {
         id: this.tabset.id,
         tabsetName: this.tabsetName

@@ -1,2 +1,2 @@
-.hide__alert
-	display none	
+.show__alert
+	display flex !important	

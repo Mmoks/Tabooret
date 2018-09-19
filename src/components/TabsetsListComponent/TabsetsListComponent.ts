@@ -6,14 +6,18 @@ import { UPLOAD_NEW_TABSET } from '@/store/actions.type';
 export default {
   name: 'TabsetsListComponent',
   components: {
-    TabsetComponent
+    TabsetComponent,
+  },
+  data() {
+    return {
+    }
   },
   props: [],
   
   computed: {
-     ...mapGetters([
+    ...mapGetters([
        'fullTabsetsData',
-    ])
+    ]),
   },
   
   mounted () {
