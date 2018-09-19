@@ -1,6 +1,6 @@
 <div class="md-layout md-gutter md-alignment-top-center">
 	<md-list>
-		<TabsetComponent v-for="tabset in fullTabsetsData" :tabset="tabset" :key="tabset.id" class="md-layout-item"/>
+		<TabsetComponent v-for="tabset in fullTabsetsData" :tabset="tabset" :key="tabset.id"/>
 		<span :class="{ hide__alert: fullTabsetsData.length }"class="md-display-1">Oops! Looks like you haven't any tabset yet.</span>
 	</md-list>
 </div>

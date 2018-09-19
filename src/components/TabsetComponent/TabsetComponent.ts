@@ -13,6 +13,7 @@ export default {
     return {
       nameIsChanging: false as boolean,
       tabsetName: '' as string,
+      isHovered: false as boolean,
     }
   },
 

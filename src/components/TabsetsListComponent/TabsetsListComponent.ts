@@ -9,14 +9,18 @@ export default {
     TabsetComponent
   },
   props: [],
+  
   computed: {
      ...mapGetters([
        'fullTabsetsData',
     ])
   },
+  
   mounted () {
   },
+  
   methods: {
 
   }
-}
+  
+}  
