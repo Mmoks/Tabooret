@@ -38,6 +38,8 @@ export default {
     },
 
     startChangingTabsetName() {
+      if (this.tabset.locked) return;
+      
       this.nameIsChanging = true;
       
       this.$nextTick(() => {
@@ -47,15 +49,14 @@ export default {
     },
 
     saveTabsetName(event) {
-      console.log(this.tabset.tabsetName);
       let payload: ChangeTabsetNamePayload = {
         id: this.tabset.id,
         tabsetName: this.tabsetName
       };
 
       this.$store.dispatch(CHANGE_TABSET_NAME, payload)
-      event.target.blur();     
       this.nameIsChanging = false;      
+      event.target.blur();     
     }
   }
 }
