@@ -5,6 +5,7 @@
   background rgb(51, 103, 214)
   border-radius 2px
   color white
+  top 5px
 
 .search__input
   left 46px
