@@ -111,14 +111,18 @@ export default new Vuex.Store({
       IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(CHANGE_TABSET_NAME, payload));
     },
 
-   async restoreTabset(context, payload: Tab[]) {
+    async restoreTabset(context, payload: Tab[]) {
       for (let i of payload) {
         await window.chrome.tabs.create({
           'url': i.url,
           'active': false
         });
       }
-      console.log('All tabs have been opened')
+
+      window.chrome.tabs.getCurrent(function (tab) {
+        window.chrome.tabs.remove(tab.id, function () {
+        });
+      });
     }
   },
 

@@ -4,7 +4,7 @@
 			<div style="height: 60px; padding-top:5px">
 				<span class="md-title tabset__name md-list-item-text" :class="{ hide__tabset__title: nameIsEditing && !tabset.locked }" 
 				@click.prevent="startEditingTabsetName"> 
-					{{ tabset.tabsetName || tabset.id }}
+					{{ tabset.tabsetName || tabset.tabs.length + ' tabs' }}
 				</span>
 				
 				<md-field md-inline :md-counter="false" class="tabsetname__input" :class="{ hide__input: !nameIsEditing || tabset.locked }">
