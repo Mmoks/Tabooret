@@ -55,7 +55,7 @@ export default {
       };
 
       this.$store.dispatch(CHANGE_TABSET_NAME, payload)
-      this.nameIsChanging = false;
+      this.nameIsChanging = false;      
       event.target.blur();
     },
 
