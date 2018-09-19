@@ -2,17 +2,19 @@
 	<md-content md-with-hover class="tabset__content md-elevation-2" :class="{ 'md-elevation-6': isHovered }" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
 		<md-list class="tabs__list">
 			<div style="height: 60px; padding-top:5px">
-				<span class="md-title tabset__name md-list-item-text" :class="{ hide__tabset__title: nameIsChanging && !tabset.locked }" @click="startChangingTabsetName"> 
+				<span class="md-title tabset__name md-list-item-text" :class="{ hide__tabset__title: nameIsEditing && !tabset.locked }" 
+				@click.prevent="startEditingTabsetName"> 
 					{{ tabset.tabsetName || tabset.id }}
 				</span>
 				
-				<md-field md-inline :md-counter="false" class="tabsetname__input" :class="{ hide__input: !nameIsChanging || tabset.locked }">
-			      <md-input ref="tabsetNameInput" @blur.native="handleBlur" maxlength=50 v-model="tabsetName" @keyup.13="saveTabsetName" v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}">
+				<md-field md-inline :md-counter="false" class="tabsetname__input" :class="{ hide__input: !nameIsEditing || tabset.locked }">
+			      <md-input ref="tabsetNameInput" maxlength=50 v-model="tabsetName" @blur.native="saveTabsetName" @keyup.esc="cancelEditing" 
+			      			@keyup.enter="saveTabsetName" v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}">
 			      	
 			      </md-input>
 			    </md-field>
 
-				<span class="md-caption created__at md-list-item-text">Created at {{ tabset.createdAt.toString() }}</span>
+				<span class="md-caption created__at md-list-item-text">Created at {{ tabset.createdAt.toLocaleString() }}</span>
 				<i class="md-raised lock__open material-icons" @click="toggleLock">
 					{{ tabset.locked ? "lock" : "lock_open" }}
 				</i>

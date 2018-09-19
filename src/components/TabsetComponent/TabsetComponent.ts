@@ -11,7 +11,7 @@ export default {
 
   data() {
     return {
-      nameIsChanging: false as boolean,
+      nameIsEditing: false as boolean,
       tabsetName: '' || this.tabset.tabsetName as string,
       isHovered: false as boolean,
     }
@@ -37,11 +37,11 @@ export default {
       this.$store.dispatch(TOGGLE_TABSET_LOCKING, this.tabset.id);
     },
 
-    startChangingTabsetName() {
+    startEditingTabsetName() {
       if (this.tabset.locked) return;
 
-      this.nameIsChanging = true;
-
+      this.nameIsEditing = true;
+      console.log(this.nameIsEditing);
       this.$nextTick(() => {
           this.$refs.tabsetNameInput.$el.focus();
       });
@@ -49,19 +49,21 @@ export default {
     },
 
     saveTabsetName(event) {
+      if (!this.nameIsEditing) return;
+
       let payload: ChangeTabsetNamePayload = {
         id: this.tabset.id,
         tabsetName: this.tabsetName
       };
-
+      console.log(false);
       this.$store.dispatch(CHANGE_TABSET_NAME, payload)
-      this.nameIsChanging = false;      
+      this.nameIsEditing = false;      
       event.target.blur();
     },
 
-    handleBlur() {
-      this.tabsetName = '';
-      this.nameIsChanging = false;
+    cancelEditing(e) {
+      this.tabsetName = this.tabset.tabsetName;
+      this.nameIsEditing = false;
     }
-  }
+  },
 }
