@@ -61,14 +61,14 @@ export default {
       event.target.blur();
     },
 
-    cancelEditing(e) {
+    cancelEditing() {
       this.tabsetName = this.tabset.tabsetName;
       this.nameIsEditing = false;
     },
 
     restoreTabset() {
       this.$store.dispatch(RESTORE_TABSET, this.tabset.tabs);
-      this.$store.dispatch(DELETE_TABSET, this.tabset.id);
+      if (!this.tabset.locked) this.$store.dispatch(DELETE_TABSET, this.tabset.id);
     }
   },
 }
