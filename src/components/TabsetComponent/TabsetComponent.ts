@@ -1,6 +1,6 @@
 import TabComponent from '@/components/TabComponent/TabComponent';
 import { Tabset, ChangeTabsetNamePayload } from '@/interface.ts';
-import { DELETE_TABSET, TOGGLE_TABSET_LOCKING, CHANGE_TABSET_NAME } from '@/store/actions.type';
+import { DELETE_TABSET, TOGGLE_TABSET_LOCKING, CHANGE_TABSET_NAME, RESTORE_TABSET } from '@/store/actions.type';
 
 
 export default {
@@ -64,6 +64,11 @@ export default {
     cancelEditing(e) {
       this.tabsetName = this.tabset.tabsetName;
       this.nameIsEditing = false;
+    },
+
+    restoreTabset() {
+      this.$store.dispatch(RESTORE_TABSET, this.tabset.tabs);
+      this.$store.dispatch(DELETE_TABSET, this.tabset.id);
     }
   },
 }

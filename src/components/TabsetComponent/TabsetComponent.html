@@ -22,10 +22,9 @@
 			<md-divider></md-divider>
 			<TabComponent v-for="tab in tabset.tabs" :key="tab.id" :lockedTabset="tabset.locked" :tab="tab" :tabsetID="tabset.id"/>
 <!-- 			<div class="control__button">
-				<md-button class="md-raised md-primary" v-bind:disabled="tabset.locked">Restore tabset</md-button>
-				<md-button class="md-raised md-accent" v-bind:disabled="tabset.locked" @click="deleteTabset">Delete tabset</md-button>
+				<!--<md-button class="md-raised md-primary" v-bind:disabled="tabset.locked">Restore tabset</md-button>-->
+				<md-button class="md-raised md-accent" @click="restoreTabset">Restore</md-button>
 			</div>
- -->
 		</md-list>
 	</md-content>
 </md-list-item>
