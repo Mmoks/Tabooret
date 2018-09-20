@@ -38,8 +38,6 @@ export default {
     },
 
     startEditingTabsetName() {
-      if (this.tabset.locked) return;
-
       this.nameIsEditing = true;
 
       this.$nextTick(() => {

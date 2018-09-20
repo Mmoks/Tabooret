@@ -2,12 +2,12 @@
 	<md-content md-with-hover class="tabset__content md-elevation-2" :class="{ 'md-elevation-6': isHovered }" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
 		<md-list class="tabs__list">
 			<div style="height: 60px; padding-top:5px">
-				<span class="md-title tabset__name md-list-item-text" :class="{ hide__tabset__title: nameIsEditing && !tabset.locked }" 
+				<span class="md-title tabset__name md-list-item-text" :class="{ hide__tabset__title: nameIsEditing }"
 				@click.prevent="startEditingTabsetName"> 
 					{{ tabset.tabsetName || tabset.tabs.length + ' tabs' }}
 				</span>
 				
-				<md-field md-inline :md-counter="false" class="tabsetname__input" :class="{ hide__input: !nameIsEditing || tabset.locked }">
+				<md-field md-inline :md-counter="false" class="tabsetname__input" :class="{ hide__input: !nameIsEditing }">
 			      <md-input ref="tabsetNameInput" maxlength=50 v-model="tabsetName" @blur.native="saveTabsetName" @keyup.esc="cancelEditing" 
 			      			@keyup.enter="saveTabsetName" v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}">
 			      	
