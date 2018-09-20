@@ -9,6 +9,7 @@ import {
   CHANGE_TABSET_NAME,
   RESTORE_TABSET
 } from './mutations.type';
+
 import {Tabset, DeleteTabPayload, Tab, ChangeTabsetNamePayload} from '@/interface.ts'
 
 
@@ -110,20 +111,6 @@ export default new Vuex.Store({
 
       IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(CHANGE_TABSET_NAME, payload));
     },
-
-    async restoreTabset(context, payload: Tab[]) {
-      for (let i of payload) {
-        await window.chrome.tabs.create({
-          'url': i.url,
-          'active': false
-        });
-      }
-
-      window.chrome.tabs.getCurrent(function (tab) {
-        window.chrome.tabs.remove(tab.id, function () {
-        });
-      });
-    }
   },
 
   getters: {

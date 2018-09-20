@@ -1,6 +1,6 @@
 import TabComponent from '@/components/TabComponent/TabComponent';
 import { Tabset, ChangeTabsetNamePayload } from '@/interface.ts';
-import { DELETE_TABSET, TOGGLE_TABSET_LOCKING, CHANGE_TABSET_NAME, RESTORE_TABSET } from '@/store/actions.type';
+import { DELETE_TABSET, TOGGLE_TABSET_LOCKING, CHANGE_TABSET_NAME } from '@/store/actions.type';
 
 
 export default {
@@ -67,7 +67,13 @@ export default {
     },
 
     restoreTabset() {
-      this.$store.dispatch(RESTORE_TABSET, this.tabset.tabs);
+      for (let tab of this.tabset.tabs) {
+        window.chrome.tabs.create({
+        'url': tab.url,
+        'active': false
+        });
+      }
+
       if (!this.tabset.locked) this.$store.dispatch(DELETE_TABSET, this.tabset.id);
     }
   },
