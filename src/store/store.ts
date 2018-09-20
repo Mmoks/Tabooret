@@ -31,8 +31,7 @@ export default new Vuex.Store({
     },
 
     sortByStar(state, paylaod: Tabset[]) {
-      //@ts-ignore
-      state.tabsets = [state.tabsets, ...paylaod].reverse();
+      state.tabsets = paylaod;
     },
 
     setTabsetTabs(state, payload: Tabset) {
@@ -132,7 +131,7 @@ export default new Vuex.Store({
           newTabsetsData.push(tabsetData);
         }
       }
-      newTabsetsData.reverse();
+      // newTabsetsData.reverse();
 
       context.commit(SORT_BY_STAR, newTabsetsData)
     },
