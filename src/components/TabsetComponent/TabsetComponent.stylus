@@ -38,3 +38,15 @@
 	top -16px
 	left 39px
 	width auto
+
+.un_stared
+    position absolute
+    right 40px
+    font-size 26px
+    top 21px
+    cursor pointer
+    color rgba(0,0,0,0.54)
+
+.stared {
+  right: 10px !important
+}

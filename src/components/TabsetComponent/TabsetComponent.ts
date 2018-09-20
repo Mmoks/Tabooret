@@ -1,6 +1,12 @@
 import TabComponent from '@/components/TabComponent/TabComponent';
-import { Tabset, ChangeTabsetNamePayload } from '@/interface.ts';
-import { DELETE_TABSET, TOGGLE_TABSET_LOCKING, CHANGE_TABSET_NAME } from '@/store/actions.type';
+import {Tabset, ChangeTabsetNamePayload} from '@/interface.ts';
+import {
+  DELETE_TABSET,
+  TOGGLE_TABSET_LOCKING,
+  CHANGE_TABSET_NAME,
+  TOGGLE_TABSET_STARING,
+  SORT_BY_STAR
+} from '@/store/actions.type';
 
 
 export default {
@@ -21,9 +27,7 @@ export default {
     tabset: {} as Tabset
   },
 
-  computed: {
-
-  },
+  computed: {},
 
   mounted() {
   },
@@ -36,12 +40,16 @@ export default {
     toggleLock() {
       this.$store.dispatch(TOGGLE_TABSET_LOCKING, this.tabset.id);
     },
+    //
+    toggleStar() {
+        this.$store.dispatch(TOGGLE_TABSET_STARING, this.tabset.id);
+    },
 
     startEditingTabsetName() {
       this.nameIsEditing = true;
 
       this.$nextTick(() => {
-          this.$refs.tabsetNameInput.$el.focus();
+        this.$refs.tabsetNameInput.$el.focus();
       });
 
     },
@@ -55,7 +63,7 @@ export default {
       };
 
       this.$store.dispatch(CHANGE_TABSET_NAME, payload)
-      this.nameIsEditing = false;      
+      this.nameIsEditing = false;
       event.target.blur();
     },
 
@@ -67,8 +75,8 @@ export default {
     restoreTabset() {
       for (let tab of this.tabset.tabs) {
         window.chrome.tabs.create({
-        'url': tab.url,
-        'active': false
+          'url': tab.url,
+          'active': false
         });
       }
 

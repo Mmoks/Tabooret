@@ -24,6 +24,7 @@ export interface Tabset {
 	createdAt: Date,
 	tabsetName: string,
 	locked: boolean,
+	stared: boolean,
 }
 
 export interface DeleteTabPayload {

@@ -80,7 +80,8 @@ const uploadTabsetToIndexedDB = (store, tabset) => {
 		tabs: tabset,
 		locked: false,
 		createdAt: createdAt,
-		tabsetName: ''
+		tabsetName: '',
+		stared: false
 	};
 
 	const req = store.put(processedTabset);
