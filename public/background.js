@@ -47,11 +47,12 @@ const createNewTab = () => {
 }
 
 const receiveMessage = (response) => {
+	console.log(response);
 	chrome.runtime.onMessage.addListener(
 		(request, sender, sendResponse) => {
-			if (request.type == 'fetchClosedTabset') {
-				chrome.runtime.onMessage.removeListener();
+			if (request.type == 'fetchClosedTabset' && response) {
 				sendResponse(response);
+				response = null;
 			}
 		});
 };

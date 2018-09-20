@@ -34,8 +34,7 @@ export const IndexedDbService = {
 			const chrome = window.chrome;
 			
 			chrome.runtime.sendMessage({type: 'fetchClosedTabset'}, (tabset: Tabset) => {
-				if(tabset)
-					resolve(tabset);
+				resolve(tabset);
 			});
 
 		});
