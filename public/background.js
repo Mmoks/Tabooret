@@ -49,8 +49,10 @@ const createNewTab = () => {
 const receiveMessage = (response) => {
 	chrome.runtime.onMessage.addListener(
 		(request, sender, sendResponse) => {
-			if (request.type == 'fetchClosedTabset')
+			if (request.type == 'fetchClosedTabset') {
+				chrome.runtime.onMessage.removeListener();
 				sendResponse(response);
+			}
 		});
 };
 
@@ -81,7 +83,7 @@ const uploadTabsetToIndexedDB = (store, tabset) => {
 	};
 
 	const req = store.put(processedTabset);
-	
+
 	return new Promise(resolve => {		
 		req.onsuccess = () => resolve(processedTabset);	
 	});

@@ -23,7 +23,7 @@ export const IndexedDbService = {
 		const fetchTabsetsData = store.getAll();			
 		return new Promise(resolve => {
 			fetchTabsetsData.onsuccess = (event) => {
-				let result: Tabset[] = event.target.result; 
+				let result: Tabset[] = event.target.result;				 
 				resolve(result);
 			}
 		});
