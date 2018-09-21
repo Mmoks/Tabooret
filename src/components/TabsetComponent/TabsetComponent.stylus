@@ -1,7 +1,6 @@
 .tabset__name
 	position relative
 	left 31px
-//	color #202124
 	
 .created__at
 	position relative
@@ -33,20 +32,16 @@
 .hide__tabset__title
 	visibility hidden
 	
+
 .tabsetname__input
 	position absolute
 	top -16px
 	left 39px
 	width auto
 
-.un_stared
-    position absolute
-    right 40px
-    font-size 26px
-    top 21px
-    cursor pointer
-    color rgba(0,0,0,0.54)
-
-.stared {
-  right: 10px !important
-}
+.un__stared
+	position absolute
+	font-size 24px
+	top 15px
+	cursor pointer
+	color rgba(0,0,0,0.54)

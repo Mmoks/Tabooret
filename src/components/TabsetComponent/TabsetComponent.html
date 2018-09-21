@@ -15,7 +15,7 @@
 			    </md-field>
 
 				<span class="md-caption created__at md-list-item-text">Created at {{ tabset.createdAt.toLocaleString() }}</span>
-				<i class="material-icons un_stared" :class="{'stared': tabset.stared}" @click="toggleStar">
+				<i class="material-icons un__stared" :class="{'stared': tabset.stared}" @click="toggleStar">
 					{{ tabset.stared ? "star_rate" : "star_border" }}
 				</i>
 				<i class="md-raised lock__open material-icons" @click="toggleLock">

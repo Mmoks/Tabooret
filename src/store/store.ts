@@ -108,6 +108,7 @@ export default new Vuex.Store({
 
       IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(TOGGLE_TABSET_LOCKING, payload));
     },
+
     toggleTabsetStaring(context, payload: number) {
       let tabset: Tabset = context.state.tabsets.filter(tabset => payload === tabset.id)[0]
       let updatedTabset: Tabset = {
@@ -118,20 +119,19 @@ export default new Vuex.Store({
         stared: !tabset.stared,
         tabsetName: tabset.tabsetName,
       };
+
       IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(TOGGLE_TABSET_STARING, payload)).then(() => context.dispatch(SORT_BY_STAR));
     },
+
     sortByStar(context) {
       let newTabsetsData: Tabset[] = [];
 
       for (let tabsetData of context.state.tabsets) {
-        console.log(tabsetData)
-        if (tabsetData.stared) {
+        if (tabsetData.stared) 
           newTabsetsData.unshift(tabsetData);
-        } else {
+        else
           newTabsetsData.push(tabsetData);
-        }
       }
-      // newTabsetsData.reverse();
 
       context.commit(SORT_BY_STAR, newTabsetsData)
     },
