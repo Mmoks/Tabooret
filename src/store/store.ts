@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import _ from 'lodash';
+
 import {IndexedDbService} from '@/common/indexeddb.service';
 import {
   SET_TABSETS_DATA, UPLOAD_NEW_TABSET,
   DELETE_TABSET, UPDATE_TABSET,
   TOGGLE_TABSET_LOCKING, SET_TABSET_TABS,
   CHANGE_TABSET_NAME,
-  TOGGLE_TABSET_STARING, SORT_BY_STAR
+  TOGGLE_TABSET_STARING, SORT_BY_STAR, SORT_BY_TIME
 } from './mutations.type';
 
 import {Tabset, DeleteTabPayload, Tab, ChangeTabsetNamePayload} from '@/interface.ts'
@@ -32,6 +34,10 @@ export default new Vuex.Store({
 
     sortByStar(state, paylaod: Tabset[]) {
       state.tabsets = paylaod;
+    },
+
+    sortByTime(state, payload: Tabset[]) {
+      state.tabsets = payload;
     },
 
     setTabsetTabs(state, payload: Tabset) {
@@ -127,13 +133,35 @@ export default new Vuex.Store({
       let newTabsetsData: Tabset[] = [];
 
       for (let tabsetData of context.state.tabsets) {
-        if (tabsetData.stared) 
+        if (tabsetData.stared)
           newTabsetsData.unshift(tabsetData);
         else
           newTabsetsData.push(tabsetData);
       }
+      context.commit(SORT_BY_STAR, newTabsetsData);
+      context.dispatch(SORT_BY_TIME, newTabsetsData);
+    },
 
-      context.commit(SORT_BY_STAR, newTabsetsData)
+    sortByTime(context, payload: Tabset[]) {
+      let staredTabsets: Tabset[] = [];
+      let unStaredTabsets: Tabset[] = [];
+
+      for (let tabset of payload) {
+        if (tabset.stared) {
+          staredTabsets.push(tabset);
+          continue;
+        }
+        unStaredTabsets.push(tabset);
+      }
+      // @ts-ignore
+      staredTabsets = _.sortBy(staredTabsets, [function(o) { return o.id; }]);
+      // @ts-ignore
+      unStaredTabsets = _.sortBy(unStaredTabsets, [function(o) { return o.id; }]);
+
+      let result: Tabset[] = [...unStaredTabsets, ...staredTabsets, ];
+
+      context.commit(SORT_BY_TIME, result);
+      console.log(result.reverse());
     },
 
     changeTabsetName(context, payload: ChangeTabsetNamePayload) {

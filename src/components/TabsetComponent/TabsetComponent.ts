@@ -5,7 +5,6 @@ import {
   TOGGLE_TABSET_LOCKING,
   CHANGE_TABSET_NAME,
   TOGGLE_TABSET_STARING,
-  SORT_BY_STAR
 } from '@/store/actions.type';
 
 

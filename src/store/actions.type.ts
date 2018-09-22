@@ -7,3 +7,4 @@ export const TOGGLE_TABSET_LOCKING = 'toggleTabsetLocking';
 export const CHANGE_TABSET_NAME = 'changeTabsetName';
 export const TOGGLE_TABSET_STARING= 'toggleTabsetStaring';
 export const SORT_BY_STAR= 'sortByStar';
+export const SORT_BY_TIME= 'sortByTime';
