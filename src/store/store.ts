@@ -153,10 +153,15 @@ export default new Vuex.Store({
         }
         unStaredTabsets.push(tabset);
       }
+
+      // Тут хуйня с тайпскриптом, тебе придется чинить :)
+
       // @ts-ignore
       staredTabsets = _.sortBy(staredTabsets, [function(o) { return o.id; }]);
       // @ts-ignore
       unStaredTabsets = _.sortBy(unStaredTabsets, [function(o) { return o.id; }]);
+
+      // Тут конец этой хуйни
 
       let result: Tabset[] = [...unStaredTabsets, ...staredTabsets, ];
 
