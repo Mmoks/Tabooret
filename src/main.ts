@@ -8,7 +8,7 @@ import VueInputAutowidth from 'vue-input-autowidth'
 import App from './App.vue';
 import router from './router';	
 import store from '@/store/store';
-import {FETCH_TABSETS_DATA, SORT_BY_STAR, UPLOAD_NEW_TABSET} from '@/store/actions.type';
+import {FETCH_TABSETS_DATA, SET_SHOW_PROPERTY, SORT_BY_STAR, UPLOAD_NEW_TABSET} from '@/store/actions.type';
 
 
 Vue.use(VueMaterial);
@@ -23,6 +23,7 @@ new Vue({
    mounted() {
   	store.dispatch(UPLOAD_NEW_TABSET, 'tabsetsData').then(async () => {
       await store.dispatch(FETCH_TABSETS_DATA, 'tabsetsData');
+      await store.dispatch(SET_SHOW_PROPERTY);
       await store.dispatch(SORT_BY_STAR);
     });
   },

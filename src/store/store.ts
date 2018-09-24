@@ -20,7 +20,8 @@ Vue.config.devtools = true;
 
 export default new Vuex.Store({
   state: {
-    tabsets: [] as Tabset[]
+    tabsets: [] as Tabset[],
+    showOnlyStared: false as boolean
   },
 
   mutations: {
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     },
 
     sortByStar(state, paylaod: Tabset[]) {
+      console.log('23', paylaod)
       state.tabsets = paylaod;
     },
 
@@ -62,7 +64,9 @@ export default new Vuex.Store({
       let tabset: Tabset = state.tabsets.filter((tabset: Tabset) => tabset.id === payload.id)[0];
       tabset.tabsetName = payload.tabsetName;
     },
-
+    showOnlyStared(state, payload: boolean) {
+      state.showOnlyStared = payload
+    }
   },
 
   actions: {
@@ -110,6 +114,7 @@ export default new Vuex.Store({
         locked: !tabset.locked,
         stared: tabset.stared,
         tabsetName: tabset.tabsetName,
+        show: tabset.show
       };
 
       IndexedDbService.updateTabset(updatedTabset).then(() => context.commit(TOGGLE_TABSET_LOCKING, payload));
@@ -133,13 +138,29 @@ export default new Vuex.Store({
       let newTabsetsData: Tabset[] = [];
 
       for (let tabsetData of context.state.tabsets) {
-        if (tabsetData.stared)
+        if (context.state.showOnlyStared && !tabsetData.stared) {
+          tabsetData.show = false;
+        } else {
+          tabsetData.show = true;
+        }
+
+        if (tabsetData.stared) {
           newTabsetsData.unshift(tabsetData);
-        else
+        }
+        else {
           newTabsetsData.push(tabsetData);
+        }
       }
+      console.log('NEW', newTabsetsData)
       context.commit(SORT_BY_STAR, newTabsetsData);
       context.dispatch(SORT_BY_TIME, newTabsetsData);
+    },
+    setShowProperty(context) {
+      let tabsets: Tabset [] = context.state.tabsets;
+      for (let tabset of tabsets) {
+        tabset.show = true
+      }
+      context.commit(SET_TABSETS_DATA, tabsets);
     },
 
     sortByTime(context, payload: Tabset[]) {
@@ -163,10 +184,9 @@ export default new Vuex.Store({
 
       // Тут конец этой хуйни
 
-      let result: Tabset[] = [...unStaredTabsets, ...staredTabsets, ];
+      let result: Tabset[] = [...unStaredTabsets, ...staredTabsets];
 
-      context.commit(SORT_BY_TIME, result);
-      console.log(result.reverse());
+      context.commit(SORT_BY_TIME, result.reverse());
     },
 
     changeTabsetName(context, payload: ChangeTabsetNamePayload) {
@@ -187,6 +207,9 @@ export default new Vuex.Store({
   getters: {
     fullTabsetsData(state) {
       return state.tabsets;
+    },
+    showOnlyStared(state) {
+      return state.showOnlyStared
     }
   }
 });
