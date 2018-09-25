@@ -151,10 +151,11 @@ export default new Vuex.Store({
           newTabsetsData.push(tabsetData);
         }
       }
-      console.log('NEW', newTabsetsData)
+      // console.log('NEW', newTabsetsData)
       context.commit(SORT_BY_STAR, newTabsetsData);
       context.dispatch(SORT_BY_TIME, newTabsetsData);
     },
+
     setShowProperty(context) {
       let tabsets: Tabset [] = context.state.tabsets;
       for (let tabset of tabsets) {
@@ -176,6 +177,8 @@ export default new Vuex.Store({
       }
 
       // Тут хуйня с тайпскриптом, тебе придется чинить :)
+      // =))
+
 
       // @ts-ignore
       staredTabsets = _.sortBy(staredTabsets, [function(o) { return o.id; }]);
@@ -183,6 +186,7 @@ export default new Vuex.Store({
       unStaredTabsets = _.sortBy(unStaredTabsets, [function(o) { return o.id; }]);
 
       // Тут конец этой хуйни
+      // ))
 
       let result: Tabset[] = [...unStaredTabsets, ...staredTabsets];
 
