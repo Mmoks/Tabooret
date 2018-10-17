@@ -9,7 +9,7 @@
             <SearchInputComponent/>
         </md-app-toolbar>
       <md-app-drawer :md-active.sync="menuVisible">
-        <md-toolbar class="md-transparent" md-elevation="0">Рома, знай, что ты - пидор</md-toolbar>
+        <md-toolbar class="md-transparent" md-elevation="0">Menu</md-toolbar>
         <TheNavigationBarComponent/>
       </md-app-drawer>
       <md-app-content style="min-height: 980px; overflow-x: hidden !important">
