@@ -39,7 +39,7 @@ export const IndexedDbService = {
     });
   },
 
-  async updateTabset(tabset: Tabset): Promise<void> {
+  async updateTabset(tabset: Tabset): Promise<object> {
     const db = await this.openConnection("tabsetsData");
     const objectStore = this.getObjectStore(db);
     const req = objectStore.put(tabset);
@@ -50,7 +50,7 @@ export const IndexedDbService = {
     });
   },
 
-  async deleteTabset(tabsetID: number): Promise<void> {
+  async deleteTabset(tabsetID: number): Promise<object> {
     const db = await this.openConnection("tabsetsData");
     const objectStore = this.getObjectStore(db);
     const req = objectStore.delete(tabsetID);
