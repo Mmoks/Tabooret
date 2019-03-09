@@ -30,7 +30,6 @@ export default new Vuex.Store({
     },
 
     sortByStar(state, paylaod: Tabset[]) {
-      console.log("23", paylaod);
       state.tabsets = paylaod;
     },
 
@@ -164,21 +163,21 @@ export default new Vuex.Store({
     },
 
     sortByStar(context) {
-      let newTabsetsData: Tabset[] = [];
-
-      for (let tabsetData of context.state.tabsets) {
-        if (context.state.showOnlyStared && !tabsetData.stared) {
-          tabsetData.show = false;
-        } else {
-          tabsetData.show = true;
-        }
-
-        if (tabsetData.stared) {
-          newTabsetsData.unshift(tabsetData);
-        } else {
-          newTabsetsData.push(tabsetData);
-        }
-      }
+      const newTabsetsData: Tabset[] = context.state.tabsets
+        .map((tabset: Tabset) => {
+          return {
+            ...tabset,
+            show: context.state.showOnlyStared && !tabset.stared
+          };
+        })
+        .sort((firstTabset: Tabset, secondTabset: Tabset) => {
+          if (firstTabset.stared && !secondTabset.stared) {
+            return -1;
+          } else if (firstTabset.stared && secondTabset.stared) {
+            return 0;
+          }
+          return 1;
+        });
       context.commit(mutationsTypes.SORT_BY_STAR, newTabsetsData);
       context.dispatch(mutationsTypes.SORT_BY_TIME, newTabsetsData);
     },
