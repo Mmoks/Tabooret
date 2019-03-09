@@ -1,4 +1,4 @@
-import TabsetComponent from "../TabsetComponent/TabsetComponent";
+import TabsetComponent from "../../components/TabsetComponent/TabsetComponent";
 
 import { mapGetters } from "vuex";
 import { UPLOAD_NEW_TABSET } from "@/store/actions.type";

@@ -1,4 +1,4 @@
-import { Tabset } from "@/containers/models/Tabset.model";
+import { Tabset } from "@/models/Tabset.model";
 
 export const IndexedDbService = {
   openConnection(dbName: string): Promise<any> {

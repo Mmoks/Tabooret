@@ -57,7 +57,7 @@
 
 <script lang="ts">
   import TheNavigationBarComponent from '@/containers/TheNavigationBarComponent/TheNavigationBarComponent';
-  import SearchInputComponent from '@/containers/SearchInputComponent/SearchInputComponent';
+  import SearchInputComponent from '@/components/SearchInputComponent/SearchInputComponent';
   
   export default {
   name: 'App',
