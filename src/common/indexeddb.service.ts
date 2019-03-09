@@ -1,7 +1,7 @@
 import { Tabset } from "@/containers/models/Tabset.model";
 
 export const IndexedDbService = {
-  openConnection(dbName: string) {
+  openConnection(dbName: string): Promise<any> {
     return new Promise(resolve => {
       const request: any = indexedDB.open(dbName, 1);
       request.onsuccess = () => {
@@ -10,13 +10,14 @@ export const IndexedDbService = {
     });
   },
 
-  getObjectStore(db) {
-    if (db)
+  getObjectStore(db): any {
+    if (db) {
       return db.transaction("tabsets", "readwrite").objectStore("tabsets");
-    else return "error";
+    }
+    return "error";
   },
 
-  fetchFullTabsetsData(store) {
+  fetchFullTabsetsData(store): Promise<Tabset[]> {
     const fetchTabsetsData = store.getAll();
     return new Promise(resolve => {
       fetchTabsetsData.onsuccess = event => {
@@ -26,7 +27,7 @@ export const IndexedDbService = {
     });
   },
 
-  fetchClosedTabset() {
+  fetchClosedTabset(): Promise<Tabset> {
     return new Promise(resolve => {
       const chrome = window.chrome;
       chrome.runtime.sendMessage(
@@ -38,7 +39,7 @@ export const IndexedDbService = {
     });
   },
 
-  async updateTabset(tabset: Tabset) {
+  async updateTabset(tabset: Tabset): Promise<void> {
     const db = await this.openConnection("tabsetsData");
     const objectStore = this.getObjectStore(db);
     const req = objectStore.put(tabset);
@@ -49,7 +50,7 @@ export const IndexedDbService = {
     });
   },
 
-  async deleteTabset(tabsetID: number) {
+  async deleteTabset(tabsetID: number): Promise<void> {
     const db = await this.openConnection("tabsetsData");
     const objectStore = this.getObjectStore(db);
     const req = objectStore.delete(tabsetID);
