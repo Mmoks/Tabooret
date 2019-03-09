@@ -1,10 +1,10 @@
 export default {
-  name: 'tab',
+  name: 'SearchInputComponent',
   components: {},
   props: [],
   data () {
     return {
-
+      isFocused: false as boolean
     }
   },
   computed: {

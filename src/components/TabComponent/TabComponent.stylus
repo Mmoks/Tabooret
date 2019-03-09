@@ -1,0 +1,28 @@
+.tab-link
+	text-decoration none
+	position absolute
+	left 60px
+	color #1a73e8
+
+.delete-tabset-icon
+	position absolute
+	left 0px
+	top 13px
+	width 16px
+	height 16px
+	cursor pointer
+	color: #CCC
+	&:hover
+		color #000
+
+.hide
+	display none
+
+.link-image
+	position relative
+	width 16px
+	height 16px
+	left 20px
+
+.tab__list__item
+	height 45px	

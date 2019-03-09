@@ -1,0 +1,9 @@
+<div class="md-layout md-gutter md-alignment-top-center">
+
+    <md-list v-if="fullTabsetsData.length">
+        <div v-for="tabset in fullTabsetsData">
+            <TabsetComponent v-if="tabset && tabset.show" :tabset="tabset" :key="tabset.id"/>
+        </div>
+    </md-list>
+
+</div>

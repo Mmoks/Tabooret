@@ -1,0 +1,47 @@
+.tabset__name
+	position relative
+	left 31px
+	
+.created__at
+	position relative
+	left 37px
+	
+.tabset__content
+	border-radius 7px
+	width 730px
+
+.tabs__list	
+	border-radius 7px
+	
+.control__button
+	position relative
+	left 27px
+	bottom 0px
+	
+.lock__open
+	position absolute
+	right 10px
+	font-size 26px
+	top 21px
+	cursor pointer
+	color rgba(0,0,0,0.54)
+
+.hide__input
+	display none
+	
+.hide__tabset__title
+	visibility hidden
+	
+
+.tabsetname__input
+	position absolute
+	top -16px
+	left 39px
+	width auto
+
+.un__stared
+	position absolute
+	font-size 24px
+	top 15px
+	cursor pointer
+	color rgba(0,0,0,0.54)

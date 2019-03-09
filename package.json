@@ -11,8 +11,10 @@
     "build-watch": "vue-cli-service build-watch"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",
+    "vue-input-autowidth": "^1.0.2",
     "vue-material": "^1.0.0-beta-10.2",
     "vue-property-decorator": "^6.0.0",
     "vue-router": "^3.0.1",
@@ -26,6 +28,7 @@
     "@vue/cli-plugin-typescript": "^3.0.0-beta.15",
     "@vue/cli-plugin-unit-mocha": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
+    "@vue/devtools": "^4.1.5",
     "@vue/test-utils": "^1.0.0-beta.16",
     "chai": "^4.1.2",
     "stylus": "^0.54.5",
@@ -36,7 +39,7 @@
   "vue": {
     "baseUrl": "",
     "productionSourceMap": false,
-    "outputDir": "./dist/build"
+    "outputDir": "./build"
   },
   "postcss": {
     "plugins": {
