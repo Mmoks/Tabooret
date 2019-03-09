@@ -1,5 +1,5 @@
 import { DELETE_TAB } from "@/store/actions.type";
-import { TabDataInterface } from "../models/TabComponent.model";
+import { TabDataInterface } from "../../models/TabComponent.model";
 
 export default {
   name: "TabComponent",

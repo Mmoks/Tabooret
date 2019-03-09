@@ -1,4 +1,4 @@
-import TabComponent from "@/containers/TabComponent/TabComponent";
+import TabComponent from "../TabComponent/TabComponent";
 import { ChangeTabsetNamePayload } from "@/interface.ts";
 import {
   DELETE_TABSET,
@@ -9,8 +9,8 @@ import {
 import {
   TabsetDataInterface,
   TabsetPropsInterface
-} from "../models/TabsetComponent.model";
-import { Tab } from "../models/Tab.model";
+} from "../../models/TabsetComponent.model";
+import { Tab } from "../../models/Tab.model";
 
 export default {
   name: "TabsetComponent",

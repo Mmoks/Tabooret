@@ -1,4 +1,4 @@
-import { SearchInputDataInterface } from "../models/SearchInputComponent.model";
+import { SearchInputDataInterface } from "../../models/SearchInputComponent.model";
 
 export default {
   name: "SearchInputComponent",
