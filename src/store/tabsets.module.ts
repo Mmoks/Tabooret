@@ -1,7 +1,7 @@
 import { TabsestsModuleInterface } from "./state.model";
 import { Tabset } from "@/containers/models/Tabset.model";
 import { ChangeTabsetNamePayload, DeleteTabPayload } from "@/interface";
-import { IndexedDbService } from "@/common/indexeddb.service";
+import { IndexedDbService } from "@/services/indexeddb.service";
 import * as mutationsTypes from "./mutations.type";
 import { Tab } from "@/containers/models/Tab.model";
 
