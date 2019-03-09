@@ -195,46 +195,28 @@ export default new Vuex.Store({
     },
 
     sortByTime(context, payload: Tabset[]) {
-      let staredTabsets: Tabset[] = [];
-      let unStaredTabsets: Tabset[] = [];
+      const staredTabsets: Tabset[] = payload
+        .filter((tabset: Tabset) => tabset.stared)
+        .sort(
+          (fitstTabset: Tabset, secondTabset: Tabset) =>
+            +new Date(secondTabset.createdAt) - +new Date(fitstTabset.createdAt)
+        );
+      const unStaredTabsets: Tabset[] = payload
+        .filter((tabset: Tabset) => !tabset.stared)
+        .sort(
+          (fitstTabset: Tabset, secondTabset: Tabset) =>
+            +new Date(secondTabset.createdAt) - +new Date(fitstTabset.createdAt)
+        );
 
-      for (let tabset of payload) {
-        if (tabset.stared) {
-          staredTabsets.push(tabset);
-          continue;
-        }
-        unStaredTabsets.push(tabset);
-      }
-
-      // Тут хуйня с тайпскриптом, тебе придется чинить :)
-      // =))
-
-      // @ts-ignore
-      staredTabsets = _.sortBy(staredTabsets, [
-        function(o) {
-          return o.id;
-        }
-      ]);
-      // @ts-ignore
-      unStaredTabsets = _.sortBy(unStaredTabsets, [
-        function(o) {
-          return o.id;
-        }
-      ]);
-
-      // Тут конец этой хуйни
-      // ))
-
-      let result: Tabset[] = [...unStaredTabsets, ...staredTabsets];
-
-      context.commit(SORT_BY_TIME, result.reverse());
+      const allTabsets: Tabset[] = [...unStaredTabsets, ...staredTabsets];
+      context.commit(SORT_BY_TIME, allTabsets.reverse());
     },
 
     changeTabsetName(context, payload: ChangeTabsetNamePayload) {
-      let tabset: Tabset = context.state.tabsets.filter(
+      const tabset: Tabset = context.state.tabsets.filter(
         tabset => payload.id === tabset.id
       )[0];
-      let updatedTabset: Tabset = {
+      const updatedTabset: Tabset = {
         createdAt: tabset.createdAt,
         id: tabset.id,
         tabs: tabset.tabs,
