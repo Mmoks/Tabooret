@@ -4,31 +4,21 @@ import Vuex from "vuex";
 import _ from "lodash";
 
 import { IndexedDbService } from "@/common/indexeddb.service";
-import {
-  SET_TABSETS_DATA,
-  UPLOAD_NEW_TABSET,
-  DELETE_TABSET,
-  UPDATE_TABSET,
-  TOGGLE_TABSET_LOCKING,
-  SET_TABSET_TABS,
-  CHANGE_TABSET_NAME,
-  TOGGLE_TABSET_STARING,
-  SORT_BY_STAR,
-  SORT_BY_TIME
-} from "./mutations.type";
+import * as mutationsTypes from "./mutations.type";
 
 import { DeleteTabPayload, ChangeTabsetNamePayload } from "@/interface.ts";
 import { Tab } from "@/containers/models/Tab.model";
 import { Tabset } from "@/containers/models/Tabset.model";
+import { StateInterface } from "./state.model";
 
 Vue.use(Vuex);
 Vue.config.devtools = true;
 
 export default new Vuex.Store({
   state: {
-    tabsets: [] as Tabset[],
-    showOnlyStared: false as boolean
-  },
+    tabsets: [],
+    showOnlyStared: false
+  } as StateInterface,
 
   mutations: {
     uploadNewTabset(state, paylaod: Tabset) {
@@ -49,7 +39,7 @@ export default new Vuex.Store({
     },
 
     setTabsetTabs(state, payload: Tabset) {
-      let tabset: Tabset = state.tabsets.filter(
+      const tabset: Tabset = state.tabsets.filter(
         (tabset: Tabset) => tabset.id === payload.id
       )[0];
       tabset.tabs = payload.tabs;
@@ -60,26 +50,32 @@ export default new Vuex.Store({
     },
 
     toggleTabsetLocking(state, payload: number) {
-      let tabset: Tabset = state.tabsets.filter(
+      const tabset: Tabset = state.tabsets.filter(
         (tabset: Tabset) => tabset.id === payload
       )[0];
       tabset.locked = !tabset.locked;
     },
     toggleTabsetStaring(state, payload: number) {
-      let tabset: Tabset = state.tabsets.filter(
+      const tabset: Tabset = state.tabsets.filter(
         (tabset: Tabset) => tabset.id === payload
       )[0];
       tabset.stared = !tabset.stared;
     },
 
     changeTabsetName(state, payload: ChangeTabsetNamePayload) {
-      let tabset: Tabset = state.tabsets.filter(
+      const tabset: Tabset = state.tabsets.filter(
         (tabset: Tabset) => tabset.id === payload.id
       )[0];
       tabset.tabsetName = payload.tabsetName;
     },
     showOnlyStared(state, payload: boolean) {
       state.showOnlyStared = payload;
+    },
+    setShowProperty(state, payload: Tabset[]) {
+      state.tabsets = payload.map(tabset => ({
+        ...tabset,
+        show: true
+      }));
     }
   },
 
@@ -90,12 +86,12 @@ export default new Vuex.Store({
       const fullTabsetsData: Tabset[] = (await IndexedDbService.fetchFullTabsetsData(
         objectStore
       )) as Tabset[];
-      return context.commit(SET_TABSETS_DATA, fullTabsetsData);
+      return context.commit(mutationsTypes.SET_TABSETS_DATA, fullTabsetsData);
     },
 
     async uploadNewTabset(context, payload: string) {
       let newTabset: Tabset = (await IndexedDbService.fetchClosedTabset()) as Tabset;
-      return context.commit(UPLOAD_NEW_TABSET, newTabset);
+      return context.commit(mutationsTypes.UPLOAD_NEW_TABSET, newTabset);
     },
 
     deleteTab(context, payload: DeleteTabPayload) {
@@ -114,25 +110,25 @@ export default new Vuex.Store({
 
       if (updatedTabset.tabs.length)
         IndexedDbService.updateTabset(updatedTabset).then(() =>
-          context.commit(SET_TABSET_TABS, updatedTabset)
+          context.commit(mutationsTypes.SET_TABSET_TABS, updatedTabset)
         );
       else
         IndexedDbService.deleteTabset(tabset.id).then(() =>
-          context.commit(DELETE_TABSET, tabset.id)
+          context.commit(mutationsTypes.DELETE_TABSET, tabset.id)
         );
     },
 
     deleteTabset(context, payload: number) {
       IndexedDbService.deleteTabset(payload).then(() =>
-        context.commit(DELETE_TABSET, payload)
+        context.commit(mutationsTypes.DELETE_TABSET, payload)
       );
     },
 
     toggleTabsetLocking(context, payload: number) {
-      let tabset: Tabset = context.state.tabsets.filter(
+      const tabset: Tabset = context.state.tabsets.filter(
         tabset => payload === tabset.id
       )[0];
-      let updatedTabset: Tabset = {
+      const updatedTabset: Tabset = {
         createdAt: tabset.createdAt,
         id: tabset.id,
         tabs: tabset.tabs,
@@ -143,7 +139,7 @@ export default new Vuex.Store({
       };
 
       IndexedDbService.updateTabset(updatedTabset).then(() =>
-        context.commit(TOGGLE_TABSET_LOCKING, payload)
+        context.commit(mutationsTypes.TOGGLE_TABSET_LOCKING, payload)
       );
     },
 
@@ -161,8 +157,10 @@ export default new Vuex.Store({
       };
 
       IndexedDbService.updateTabset(updatedTabset)
-        .then(() => context.commit(TOGGLE_TABSET_STARING, payload))
-        .then(() => context.dispatch(SORT_BY_STAR));
+        .then(() =>
+          context.commit(mutationsTypes.TOGGLE_TABSET_STARING, payload)
+        )
+        .then(() => context.dispatch(mutationsTypes.SORT_BY_STAR));
     },
 
     sortByStar(context) {
@@ -181,17 +179,12 @@ export default new Vuex.Store({
           newTabsetsData.push(tabsetData);
         }
       }
-      // console.log('NEW', newTabsetsData)
-      context.commit(SORT_BY_STAR, newTabsetsData);
-      context.dispatch(SORT_BY_TIME, newTabsetsData);
+      context.commit(mutationsTypes.SORT_BY_STAR, newTabsetsData);
+      context.dispatch(mutationsTypes.SORT_BY_TIME, newTabsetsData);
     },
 
     setShowProperty(context) {
-      let tabsets: Tabset[] = context.state.tabsets;
-      for (let tabset of tabsets) {
-        tabset.show = true;
-      }
-      context.commit(SET_TABSETS_DATA, tabsets);
+      context.commit(mutationsTypes.SET_SHOW_PROPERTY, context.state.tabsets);
     },
 
     sortByTime(context, payload: Tabset[]) {
@@ -209,7 +202,7 @@ export default new Vuex.Store({
         );
 
       const allTabsets: Tabset[] = [...unStaredTabsets, ...staredTabsets];
-      context.commit(SORT_BY_TIME, allTabsets.reverse());
+      context.commit(mutationsTypes.SORT_BY_TIME, allTabsets.reverse());
     },
 
     changeTabsetName(context, payload: ChangeTabsetNamePayload) {
@@ -226,7 +219,7 @@ export default new Vuex.Store({
       };
 
       IndexedDbService.updateTabset(updatedTabset).then(() =>
-        context.commit(CHANGE_TABSET_NAME, payload)
+        context.commit(mutationsTypes.CHANGE_TABSET_NAME, payload)
       );
     }
   },
