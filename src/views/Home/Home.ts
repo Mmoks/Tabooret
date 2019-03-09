@@ -1,5 +1,5 @@
 import { Component, Vue } from "vue-property-decorator";
-import TabsetsListComponent from "@/containers/TabsetsListComponent/TabsetsListComponent"; // @ is an alias to /src
+import TabsetsListComponent from "@/containers/TabsetsListComponent/TabsetsListComponent";
 
 @Component({
   components: {
