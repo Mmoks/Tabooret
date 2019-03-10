@@ -1,23 +1,23 @@
-import TabsetComponent from "../../components/TabsetComponent/TabsetComponent";
+import TabsetComponent from '../../components/TabsetComponent/TabsetComponent'
 
-import { mapGetters } from "vuex";
-import { UPLOAD_NEW_TABSET } from "@/store/actions.type";
+import { mapGetters } from 'vuex'
+import { UPLOAD_NEW_TABSET } from '@/store/actions.type'
 
 export default {
-  name: "TabsetsListComponent",
+  name: 'TabsetsListComponent',
   components: {
-    TabsetComponent
+    TabsetComponent,
   },
   data() {
-    return {};
+    return {}
   },
   props: [],
 
   computed: {
-    ...mapGetters(["fullTabsetsData"])
+    ...mapGetters(['fullTabsetsData']),
   },
 
   mounted() {},
 
-  methods: {}
-};
+  methods: {},
+}

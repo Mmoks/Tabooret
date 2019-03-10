@@ -1,6 +1,6 @@
-import { Tabset } from "@/models/Tabset.model";
+import { Tabset } from '@/models/Tabset.model'
 
 export interface TabsestsModuleInterface {
-  tabsets: Tabset[];
-  showOnlyStared: boolean;
+  tabsets: Tabset[]
+  showOnlyStared: boolean
 }

@@ -13,7 +13,8 @@
             class="md-title tabset__name md-list-item-text"
             :class="{ hide__tabset__title: nameIsEditing }"
             @click.prevent="startEditingTabsetName"
-          >{{ tabset.tabsetName || tabset.tabs.length + ' tabs' }}</span>
+            >{{ tabset.tabsetName || tabset.tabs.length + ' tabs' }}</span
+          >
 
           <md-field
             md-inline
@@ -28,22 +29,26 @@
               @blur.native="saveTabsetName"
               @keyup.esc="cancelEditing"
               @keyup.enter="saveTabsetName"
-              v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}"
+              v-autowidth="{
+                maxWidth: '960px',
+                minWidth: '20px',
+                comfortZone: 0,
+              }"
             ></md-input>
           </md-field>
 
-          <span
-            class="md-caption created__at md-list-item-text"
-          >Created at {{ tabset.createdAt.toLocaleString() }}</span>
+          <span class="md-caption created__at md-list-item-text"
+            >Created at {{ tabset.createdAt.toLocaleString() }}</span
+          >
           <i
             class="material-icons un__stared"
-            :class="{'stared': tabset.stared}"
+            :class="{ stared: tabset.stared }"
             @click="toggleStar"
-          >{{ tabset.stared ? "star_rate" : "star_border" }}</i>
-          <i
-            class="md-raised lock__open material-icons"
-            @click="toggleLock"
-          >{{ tabset.locked ? "lock" : "lock_open" }}</i>
+            >{{ tabset.stared ? 'star_rate' : 'star_border' }}</i
+          >
+          <i class="md-raised lock__open material-icons" @click="toggleLock">{{
+            tabset.locked ? 'lock' : 'lock_open'
+          }}</i>
         </div>
         <md-divider></md-divider>
         <TabComponent

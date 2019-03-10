@@ -1,9 +1,9 @@
 export interface DeleteTabPayload {
-	tabID: number,
-	tabsetID: number,
+  tabID: number
+  tabsetID: number
 }
 
 export interface ChangeTabsetNamePayload {
-	id: number,
-	tabsetName: string
+  id: number
+  tabsetName: string
 }

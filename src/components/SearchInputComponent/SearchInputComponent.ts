@@ -1,15 +1,15 @@
-import { SearchInputDataInterface } from "../../models/SearchInputComponent.model";
+import { SearchInputDataInterface } from '../../models/SearchInputComponent.model'
 
 export default {
-  name: "SearchInputComponent",
+  name: 'SearchInputComponent',
   components: {},
   props: [],
   data(): SearchInputDataInterface {
     return {
-      isFocused: false
-    };
+      isFocused: false,
+    }
   },
   computed: {},
   mounted() {},
-  methods: {}
-};
+  methods: {},
+}
