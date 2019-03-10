@@ -1,19 +1,19 @@
-import { DELETE_TAB } from "@/store/actions.type";
-import { TabDataInterface } from "../../models/TabComponent.model";
+import { DELETE_TAB } from '@/store/actions.type'
+import { TabDataInterface } from '../../models/TabComponent.model'
 
 export default {
-  name: "TabComponent",
+  name: 'TabComponent',
   components: {},
   props: {
     tab: Object,
     tabsetID: Number,
-    lockedTabset: Boolean
+    lockedTabset: Boolean,
   },
 
   data(): TabDataInterface {
     return {
-      tabIsHovered: false
-    };
+      tabIsHovered: false,
+    }
   },
 
   computed: {},
@@ -25,9 +25,9 @@ export default {
       return !this.lockedTabset
         ? this.$store.dispatch(DELETE_TAB, {
             tabID: this.tab.id,
-            tabsetID: this.tabsetID
+            tabsetID: this.tabsetID,
           })
-        : null;
-    }
-  }
-};
+        : null
+    },
+  },
+}

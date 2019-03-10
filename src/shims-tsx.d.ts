@@ -1,4 +1,4 @@
-import Vue, { VNode } from 'vue';
+import Vue, { VNode } from 'vue'
 
 declare module 'vue/types/vue' {
   // Global properties can be declared
@@ -20,5 +20,7 @@ declare global {
   }
 }
 declare global {
-  interface Window { chrome: any; }
+  interface Window {
+    chrome: any
+  }
 }

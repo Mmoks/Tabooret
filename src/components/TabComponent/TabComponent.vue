@@ -8,17 +8,23 @@
       class="delete-tabset-icon material-icons"
       :class="{ hide: !tabIsHovered || lockedTabset }"
       @click="deleteTab"
-    >close</i>
+      >close</i
+    >
     <img
       class="link-image"
-      :src="tab.favIconUrl ? tab.favIconUrl : 'https://cdn3.iconfinder.com/data/icons/faticons/32/globe-01-256.png'"
-    >
+      :src="
+        tab.favIconUrl
+          ? tab.favIconUrl
+          : 'https://cdn3.iconfinder.com/data/icons/faticons/32/globe-01-256.png'
+      "
+    />
     <a
       class="tab-link md-list-item-text"
       target="blank"
       :href="tab.url"
       @click="deleteTab"
-    >{{ tab.title }}</a>
+      >{{ tab.title }}</a
+    >
   </md-list-item>
 </template>
 <script src="./TabComponent.ts" lang="ts"></script>

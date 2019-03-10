@@ -3,7 +3,8 @@
     <i
       :class="{ search__input_icon_focused: isFocused }"
       class="search__input_icon material-icons"
-    >search</i>
+      >search</i
+    >
     <md-input
       @blur="isFocused = false"
       @focus="isFocused = true"
@@ -14,4 +15,3 @@
 </template>
 <script src="./SearchInputComponent.ts" lang="ts"></script>
 <style src="./SearchInputComponent.stylus" scoped lang="stylus"></style>
-

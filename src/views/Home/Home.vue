@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <TabsetsListComponent/>
+    <TabsetsListComponent />
   </div>
 </template>
 <script lang="ts" src="./Home.ts"></script>
