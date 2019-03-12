@@ -56,7 +56,9 @@
           :key="tab.id"
           :lockedTabset="tabset.locked"
           :tab="tab"
-          :tabsetID="tabset.id"
+          :tabsetId="tabset.id"
+          @delete-tab="deleteTab"
+
         />
         <!-- 			<div class="control__button">
         <md-button class="md-raised md-primary" v-bind:disabled="tabset.locked">Restore tabset</md-button>-->

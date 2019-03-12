@@ -1,9 +1,8 @@
 import { TabsestsModuleInterface } from './state.model'
-import { Tabset } from '@/models/Tabset.model'
-import { ChangeTabsetNamePayload, DeleteTabPayload } from '@/interface'
+import { Tabset, ChangeTabsetNamePayload } from '@/models/Tabset.model'
 import { IndexedDbService } from '@/services/indexeddb.service'
 import * as mutationsTypes from './mutations.type'
-import { Tab } from '@/models/Tab.model'
+import { Tab, DeleteTabPayload } from '@/models/Tab.model'
 
 const initialState: TabsestsModuleInterface = {
   tabsets: [],
@@ -75,20 +74,22 @@ export const actions = {
     const objectStore: object = IndexedDbService.getObjectStore(db)
     const fullTabsetsData: Tabset[] = (await IndexedDbService.fetchFullTabsetsData(
       objectStore
-    )) as Tabset[]
+    )).map((tabset: Tabset) => ({ ...tabset, show: true })) as Tabset[]
     return context.commit(mutationsTypes.SET_TABSETS_DATA, fullTabsetsData)
   },
 
   async uploadNewTabset(context, payload: string) {
     const newTabset: Tabset = (await IndexedDbService.fetchClosedTabset()) as Tabset
-    return context.commit(mutationsTypes.UPLOAD_NEW_TABSET, newTabset)
+    return newTabset
+      ? context.commit(mutationsTypes.UPLOAD_NEW_TABSET, newTabset)
+      : null
   },
 
   deleteTab(context, payload: DeleteTabPayload) {
     const tabset: Tabset = context.state.tabsets.filter(
-      tabset => payload.tabsetID === tabset.id
+      tabset => payload.tabsetId === tabset.id
     )[0]
-    const newTabs: Tab[] = tabset.tabs.filter(tab => tab.id !== payload.tabID)
+    const newTabs: Tab[] = tabset.tabs.filter(tab => tab.id !== payload.tabId)
     const updatedTabset: Tabset = {
       createdAt: tabset.createdAt,
       id: tabset.id,
@@ -156,7 +157,9 @@ export const actions = {
       .map((tabset: Tabset) => {
         return {
           ...tabset,
-          show: context.state.showOnlyStared && !tabset.stared,
+          show:
+            (context.state.showOnlyStared && !tabset.stared) ||
+            !context.state.showOnlyStared,
         }
       })
       .sort((firstTabset: Tabset, secondTabset: Tabset) => {

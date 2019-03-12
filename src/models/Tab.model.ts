@@ -17,3 +17,8 @@ export interface Tab {
   width: number
   windowId: number
 }
+
+export interface DeleteTabPayload {
+  tabId: number
+  tabsetId: number
+}

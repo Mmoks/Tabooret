@@ -1,3 +1,3 @@
-export interface SearchInputDataInterface {
+export interface SearchInputData {
   isFocused: boolean
 }

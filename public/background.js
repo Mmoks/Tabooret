@@ -16,13 +16,11 @@ const openConnection = dbName => {
   return new Promise(resolve => {
     const request = indexedDB.open(dbName, 1);
     let db = null;
-    console.log(request);
     request.onsuccess = () => {
       if (request.result.objectStoreNames.length) resolve(request.result);
     };
     request.onupgradeneeded = event => {
       db = event.target;
-      console.log(db);
       const objectStore = db.result.createObjectStore("tabsets", {
         keyPath: "id"
       });
@@ -53,7 +51,6 @@ const createNewTab = () => {
 };
 
 const receiveMessage = response => {
-  console.log(response);
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type == "fetchClosedTabset" && response) {
       sendResponse(response);
@@ -83,7 +80,6 @@ const uploadTabsetToIndexedDB = (store, tabset) => {
     tabsetName: "",
     stared: false
   };
-
   const req = store.put(processedTabset);
 
   return new Promise(resolve => {

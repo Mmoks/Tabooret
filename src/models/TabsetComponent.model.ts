@@ -1,11 +1,5 @@
-import { Tabset } from './Tabset.model'
-
-export interface TabsetDataInterface {
+export interface TabsetData {
   nameIsEditing: boolean
   tabsetName: string
   isHovered: boolean
-}
-
-export interface TabsetPropsInterface {
-  tabset: Tabset
 }
