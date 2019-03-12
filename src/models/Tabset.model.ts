@@ -9,3 +9,8 @@ export interface Tabset {
   stared: boolean
   show?: boolean
 }
+
+export interface ChangeTabsetNamePayload {
+  id: number
+  tabsetName: string
+}

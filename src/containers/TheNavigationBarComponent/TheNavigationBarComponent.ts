@@ -20,7 +20,6 @@ export default {
 
   mounted() {
     setTimeout(() => {
-      console.log('SADAS', this.fullTabsetsData)
       for (let tabset of this.fullTabsetsData) {
         if (tabset.stared) {
           this.count++

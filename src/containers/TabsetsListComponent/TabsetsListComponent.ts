@@ -1,23 +1,53 @@
-import TabsetComponent from '../../components/TabsetComponent/TabsetComponent'
+import TabsetComponent from "../../components/TabsetComponent/TabsetComponent";
 
-import { mapGetters } from 'vuex'
-import { UPLOAD_NEW_TABSET } from '@/store/actions.type'
+import { mapGetters } from "vuex";
+import * as actionsTypes from "@/store/actions.type";
+import { DeleteTabPayload } from "@/models/Tab.model";
+import store from "@/store/store";
+import { ChangeTabsetNamePayload } from "@/models/Tabset.model";
+
+const DB_NAME = "tabsetsData";
 
 export default {
-  name: 'TabsetsListComponent',
+  name: "TabsetsListComponent",
   components: {
-    TabsetComponent,
+    TabsetComponent
   },
   data() {
-    return {}
+    return {};
   },
   props: [],
 
   computed: {
-    ...mapGetters(['fullTabsetsData']),
+    ...mapGetters(["fullTabsetsData"])
   },
 
-  mounted() {},
+  mounted() {
+    store.dispatch(actionsTypes.UPLOAD_NEW_TABSET, DB_NAME).then(async () => {
+      await store.dispatch(actionsTypes.FETCH_TABSETS_DATA, DB_NAME);
+      await store.dispatch(actionsTypes.SORT_BY_STAR);
+    });
+  },
 
-  methods: {},
-}
+  methods: {
+    deleteTab(payload: DeleteTabPayload) {
+      store.dispatch(actionsTypes.DELETE_TAB, payload);
+    },
+
+    deleteTabset(tabsetId: number) {
+      store.dispatch(actionsTypes.DELETE_TABSET, tabsetId);
+    },
+
+    toggleLock(tabsetId: number) {
+      store.dispatch(actionsTypes.TOGGLE_TABSET_LOCKING, tabsetId);
+    },
+
+    toggleStar(tabsetId: number) {
+      store.dispatch(actionsTypes.TOGGLE_TABSET_STARING, tabsetId);
+    },
+
+    changeTabsetName(payload: ChangeTabsetNamePayload) {
+      store.dispatch(actionsTypes.CHANGE_TABSET_NAME, payload);
+    }
+  }
+};

@@ -1,3 +1,3 @@
-export interface TabDataInterface {
+export interface TabData {
   tabIsHovered: boolean
 }
