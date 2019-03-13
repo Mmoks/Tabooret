@@ -1,36 +1,26 @@
-import { SORT_BY_STAR } from '@/store/actions.type'
-import { mapGetters } from 'vuex'
-import { SHOW_ONLY_STARED } from '@/store/mutations.type'
+import { SHOW_ONLY_STARRED } from "@/store/actions.type";
+import { mapGetters } from "vuex";
+import store from '@/store/store';
 
 export default {
-  name: 'TheNavigationBarComponent',
+  name: "TheNavigationBarComponent",
   components: {},
   props: [],
 
   data() {
     return {
       menuVisible: false,
-      count: 0,
-    }
+    };
   },
 
   computed: {
-    ...mapGetters(['showOnlyStared', 'fullTabsetsData']),
+    ...mapGetters(["showOnlyStarred", "tabsets", "starredTabsetsCount"])
   },
 
-  mounted() {
-    setTimeout(() => {
-      for (let tabset of this.fullTabsetsData) {
-        if (tabset.stared) {
-          this.count++
-        }
-      }
-    }, 500)
-  },
+  mounted() {},
   methods: {
-    toggleShowOnlyStared() {
-      this.$store.commit(SHOW_ONLY_STARED, !this.showOnlyStared)
-      this.$store.dispatch(SORT_BY_STAR)
-    },
-  },
-}
+    toggleShowOnlyStarred() {
+      store.dispatch(SHOW_ONLY_STARRED, !this.showOnlyStarred);
+    }
+  }
+};

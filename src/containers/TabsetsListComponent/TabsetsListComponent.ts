@@ -6,8 +6,6 @@ import { DeleteTabPayload } from "@/models/Tab.model";
 import store from "@/store/store";
 import { ChangeTabsetNamePayload } from "@/models/Tabset.model";
 
-const DB_NAME = "tabsetsData";
-
 export default {
   name: "TabsetsListComponent",
   components: {
@@ -19,12 +17,12 @@ export default {
   props: [],
 
   computed: {
-    ...mapGetters(["fullTabsetsData"])
+    ...mapGetters(["tabsets"])
   },
 
   mounted() {
-    store.dispatch(actionsTypes.UPLOAD_NEW_TABSET, DB_NAME).then(async () => {
-      await store.dispatch(actionsTypes.FETCH_TABSETS_DATA, DB_NAME);
+    store.dispatch(actionsTypes.UPLOAD_NEW_TABSET).then(async () => {
+      await store.dispatch(actionsTypes.FETCH_TABSETS_DATA);
       await store.dispatch(actionsTypes.SORT_BY_STAR);
     });
   },
