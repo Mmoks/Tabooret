@@ -1,14 +1,9 @@
 <template>
   <md-list>
-    <md-list-item>
+    <md-list-item  style="cursor:pointer;" @click="toggleShowOnlyStarred">
       <md-icon>move_to_inbox</md-icon>
-      <span class="md-list-item-text" @click="toggleShowOnlyStared"
-        >Stared</span
-      >
-      <md-badge
-        class="md-primary md-square colored"
-        md-content="Тут цифры"
-      ></md-badge>
+      <span class="md-list-item-text">Starred</span>
+      <md-badge class="md-primary md-square colored" :md-content="starredTabsetsCount"></md-badge>
     </md-list-item>
     <md-list-item>
       <md-icon>send</md-icon>

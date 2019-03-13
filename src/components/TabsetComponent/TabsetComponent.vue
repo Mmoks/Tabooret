@@ -13,8 +13,7 @@
             class="md-title tabset__name md-list-item-text"
             :class="{ hide__tabset__title: nameIsEditing }"
             @click.prevent="startEditingTabsetName"
-            >{{ tabset.tabsetName || tabset.tabs.length + ' tabs' }}</span
-          >
+          >{{ tabset.tabsetName || tabset.tabs.length + ' tabs' }}</span>
 
           <md-field
             md-inline
@@ -37,18 +36,19 @@
             ></md-input>
           </md-field>
 
-          <span class="md-caption created__at md-list-item-text"
-            >Created at {{ tabset.createdAt.toLocaleString() }}</span
-          >
+          <span
+            class="md-caption created__at md-list-item-text"
+          >Created at {{ tabset.createdAt.toLocaleString() }}</span>
           <i
-            class="material-icons un__stared"
-            :class="{ stared: tabset.stared }"
+            class="material-icons un__starred"
+            :class="{ starred: tabset.starred }"
             @click="toggleStar"
-            >{{ tabset.stared ? 'star_rate' : 'star_border' }}</i
-          >
-          <i class="md-raised lock__open material-icons" @click="toggleLock">{{
+          >{{ tabset.starred ? 'star_rate' : 'star_border' }}</i>
+          <i class="md-raised lock__open material-icons" @click="toggleLock">
+            {{
             tabset.locked ? 'lock' : 'lock_open'
-          }}</i>
+            }}
+          </i>
         </div>
         <md-divider></md-divider>
         <TabComponent
@@ -58,10 +58,10 @@
           :tab="tab"
           :tabsetId="tabset.id"
           @delete-tab="deleteTab"
-
         />
-        <!-- 			<div class="control__button">
-        <md-button class="md-raised md-primary" v-bind:disabled="tabset.locked">Restore tabset</md-button>-->
+        <div class="control__button">
+          <md-button class="md-raised md-primary" v-bind:disabled="tabset.locked">Restore tabset</md-button>
+        </div>
       </md-list>
     </md-content>
   </md-list-item>
