@@ -3,15 +3,16 @@
     <i
       :class="{ search__input_icon_focused: isFocused }"
       class="search__input_icon material-icons"
-      >search</i
-    >
+    >search</i>
     <md-input
       @blur="isFocused = false"
       @focus="isFocused = true"
+      @input="filterTabsets"
+      v-model="query"
       class="search__input"
-      placeholder="Search items"
+      placeholder="Filter tabsets"
     ></md-input>
   </md-field>
 </template>
-<script src="./SearchInputComponent.ts" lang="ts"></script>
-<style src="./SearchInputComponent.stylus" scoped lang="stylus"></style>
+<script src="./FilterInputComponent.ts" lang="ts"></script>
+<style src="./FilterInputComponent.stylus" scoped lang="stylus"></style>
