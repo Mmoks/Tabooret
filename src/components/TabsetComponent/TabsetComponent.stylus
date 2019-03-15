@@ -39,9 +39,10 @@
 	left 39px
 	width auto
 
-.un__stared
+.un__starred
 	position absolute
 	font-size 24px
 	top 15px
+	left 5px
 	cursor pointer
 	color rgba(0,0,0,0.54)

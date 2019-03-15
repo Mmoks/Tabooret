@@ -1,47 +1,47 @@
-import TabComponent from '@/components/TabComponent/TabComponent';
-import {Tabset, ChangeTabsetNamePayload} from '@/interface.ts';
+import TabComponent from "../TabComponent/TabComponent";
 import {
   DELETE_TABSET,
   TOGGLE_TABSET_LOCKING,
   CHANGE_TABSET_NAME,
-  TOGGLE_TABSET_STARING,
-} from '@/store/actions.type';
-
+  TOGGLE_TABSET_STARING
+} from "@/store/actions.type";
+import { TabsetData } from "../../models/TabsetComponent.model";
+import { Tab, DeleteTabPayload } from "../../models/Tab.model";
+import { ChangeTabsetNamePayload } from "@/models/Tabset.model";
 
 export default {
-  name: 'TabsetComponent',
+  name: "TabsetComponent",
   components: {
-    TabComponent,
+    TabComponent
   },
 
-  data() {
+  data(): TabsetData {
     return {
-      nameIsEditing: false as boolean,
-      tabsetName: '' || this.tabset.tabsetName as string,
-      isHovered: false as boolean,
-    }
+      nameIsEditing: false,
+      tabsetName: "" || this.tabset.tabsetName,
+      isHovered: false
+    };
   },
 
   props: {
-    tabset: {} as Tabset
+    tabset: Object
   },
 
   computed: {},
 
-  mounted() {
-  },
+  mounted() {},
 
   methods: {
     deleteTabset() {
-      this.$store.dispatch(DELETE_TABSET, this.tabset.id);
+      this.$emit("delete-tabset", this.tabset.id);
     },
 
     toggleLock() {
-      this.$store.dispatch(TOGGLE_TABSET_LOCKING, this.tabset.id);
+      this.$emit("toggle-lock", this.tabset.id);
     },
-    //
+
     toggleStar() {
-        this.$store.dispatch(TOGGLE_TABSET_STARING, this.tabset.id);
+      this.$emit("toggle-star", this.tabset.id);
     },
 
     startEditingTabsetName() {
@@ -50,18 +50,18 @@ export default {
       this.$nextTick(() => {
         this.$refs.tabsetNameInput.$el.focus();
       });
-
     },
 
     saveTabsetName(event) {
-      if (!this.nameIsEditing) return;
+      if (!this.nameIsEditing) {
+        return;
+      }
 
-      let payload: ChangeTabsetNamePayload = {
+      const payload: ChangeTabsetNamePayload = {
         id: this.tabset.id,
         tabsetName: this.tabsetName
       };
-
-      this.$store.dispatch(CHANGE_TABSET_NAME, payload)
+      this.$emit("change-tabset-name", payload);
       this.nameIsEditing = false;
       event.target.blur();
     },
@@ -72,14 +72,19 @@ export default {
     },
 
     restoreTabset() {
-      for (let tab of this.tabset.tabs) {
+      this.tabset.tabs.map((tab: Tab) =>
         window.chrome.tabs.create({
-          'url': tab.url,
-          'active': false
-        });
-      }
+          url: tab.url,
+          active: false
+        })
+      );
+      return !this.tabset.locked
+        ? this.$emit("delete-tabset", this.tabset.id)
+        : null;
+    },
 
-      if (!this.tabset.locked) this.$store.dispatch(DELETE_TABSET, this.tabset.id);
+    deleteTab(payload: DeleteTabPayload) {
+      this.$emit("delete-tab", payload);
     }
-  },
-}
+  }
+};
