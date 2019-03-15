@@ -11,7 +11,7 @@
           <md-icon>menu</md-icon>
         </md-button>
         <span class="app__title md-title">Tabooret</span>
-        <SearchInputComponent />
+        <FilterInputComponent />
       </md-app-toolbar>
       <md-app-drawer :md-active.sync="menuVisible">
         <md-toolbar class="md-transparent" md-elevation="0">Menu</md-toolbar>
@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import TheNavigationBarComponent from '@/containers/TheNavigationBarComponent/TheNavigationBarComponent'
-import SearchInputComponent from '@/components/SearchInputComponent/SearchInputComponent'
+import FilterInputComponent from '@/containers/FilterInputComponent/FilterInputComponent'
 
 export default {
   name: 'App',
@@ -71,7 +71,7 @@ export default {
   }),
   components: {
     TheNavigationBarComponent,
-    SearchInputComponent,
+    FilterInputComponent,
   },
 }
 </script>
