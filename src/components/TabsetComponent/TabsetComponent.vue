@@ -60,7 +60,8 @@
           @delete-tab="deleteTab"
         />
         <div class="control__button">
-          <md-button class="md-raised md-primary" v-bind:disabled="tabset.locked">Restore tabset</md-button>
+          <md-button class="md-primary" @click="restoreTabset">Restore tabset</md-button>
+          <md-button class="md-accent" v-bind:disabled="tabset.locked" @click="deleteTabset">Delete tabset</md-button>
         </div>
       </md-list>
     </md-content>
